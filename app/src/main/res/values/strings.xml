@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">BapotoDriver</string>
+    <string name="content_de_vous_revoir">Content de vous revoir !</string>
+    <string name="enregistrez_vous_pour_continuer">Enregistrez vous pour continuer</string>
+    <string name="email">Email</string>
+    <string name="Password">Mot de passe</string>
+    <string name="create_new_account">Créer un nouveau compte</string>
+    <string name="sign_in">CONNEXION</string>
+    <string name="add_image">Ajouter photo</string>
+    <string name="name">Nom</string>
+    <string name="conrfirm_password">Conrfirmation mot de passe</string>
+    <string name="sign_up">Créer un compte</string>
+    <string name="select_user">Choisir un utilisateur</string>
+    <string name="on_line">En ligne</string>
+</resources>
