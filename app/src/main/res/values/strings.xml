@@ -12,4 +12,15 @@
     <string name="sign_up">Créer un compte</string>
     <string name="select_user">Choisir un utilisateur</string>
     <string name="on_line">En ligne</string>
+    <string name="admin">admin</string>
+    <string name="administrateur_bapoto">Administrateur Bapoto</string>
+    <string name="entrez_password_to_continue">Entrez mot de passe pour continuer</string>
+
+    <string name="infos">Infos</string>
+    <string name="drop_off">Destination</string>
+    <string name="pick_up">RDV</string>
+    <string name="hour">Heure</string>
+    <string name="date">Date</string>
+    <string name="new_booking">Entrer Nouvelle Reservation</string>
+    <string name="ok">OK</string>
 </resources>

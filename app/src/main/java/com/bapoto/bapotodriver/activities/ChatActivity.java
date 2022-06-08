@@ -46,7 +46,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class   ChatActivity extends BaseActivity {
+public class ChatActivity extends BaseActivity {
 
     private ActivityChatBinding binding;
     private User receiverUser;
@@ -117,9 +117,6 @@ public class   ChatActivity extends BaseActivity {
                 body.put(Constants.REMOTE_MSG_REGISTRATION,tokens);
 
                 sendNotification(body.toString());
-
-
-
             }catch (Exception e) {
                 showToast(e.getMessage());
             }
@@ -183,6 +180,11 @@ public class   ChatActivity extends BaseActivity {
                     isReceiverAvailable = availability == 1;
                 }
                 receiverUser.token = value.getString(Constants.KEY_FCM_TOKEN);
+                if (receiverUser.image == null) {
+                    receiverUser.image = value.getString(Constants.KEY_IMAGE);
+                    chatAdapter.setReceiverProfilImage(getBitmapFromEncodedString(receiverUser.image));
+                    chatAdapter.notifyItemRangeChanged(0,chatMessages.size());
+                }
 
             }
             if (isReceiverAvailable) {
@@ -239,9 +241,12 @@ public class   ChatActivity extends BaseActivity {
 
 
     private Bitmap getBitmapFromEncodedString(String encodedImage) {
-        byte[] bytes =   Base64.decode(encodedImage,Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes,0, bytes.length);
-
+        if (encodedImage != null) {
+            byte[] bytes =   Base64.decode(encodedImage,Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+        } else {
+            return null;
+        }
     }
 
     private void loadReceiverDetails() {

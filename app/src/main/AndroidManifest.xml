@@ -12,9 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BapotoDriver">
         <activity
-            android:name=".activities.ChatActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:name=".MainActivityResevation"
             android:exported="false" />
+        <activity
+            android:name=".activities.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SignUpAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChatActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.UsersActivity"
             android:exported="false" />

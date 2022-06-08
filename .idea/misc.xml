@@ -4,14 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.40260416666666665" />
+        <entry key="app/src/main/res/drawable/background_chat_input.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/background_content_bottom.xml" value="0.2535" />
+        <entry key="app/src/main/res/drawable/background_icon.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/background_image.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/background_input.xml" value="0.2535" />
+        <entry key="app/src/main/res/drawable/background_received_message.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/background_sent_message.xml" value="0.2535" />
+        <entry key="app/src/main/res/drawable/ic_back.xml" value="0.2535" />
+        <entry key="app/src/main/res/layout/activity_admin.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/activity_sign_up_admin.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_users.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/item_container_conversation.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/item_container_received_message.xml" value="0.2776268115942029" />

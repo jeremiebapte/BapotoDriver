@@ -45,6 +45,8 @@ public class SignInActivity extends AppCompatActivity {
                 signIn();
             }
         });
+        binding.textAdmin.setOnClickListener(view ->
+                startActivity(new Intent(new Intent(getApplicationContext(), SignUpAdminActivity.class))));
     }
 
     private void signIn(){

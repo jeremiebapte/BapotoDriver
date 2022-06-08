@@ -7,9 +7,16 @@ public class Constants {
     public static final String KEY_COLLECTION_USERS = "users";
     public static final String KEY_NAME = "name";
     public static final String KEY_EMAIL = "email";
+    public static final String KEY_DATE = "date";
+    public static final String KEY_HOUR = "hour";
+    public static final String KEY_PICK_UP = "pickuUp";
+    public static final String KEY_DROP_OFF = "dropOff";
+    public static final String KEY_INFOS = "infos";
+    public static final String KEY_COLLECTION_RESERVATIONS = "reservations";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_PREFERENCE_NAME = "chatAppPreference";
     public static final String KEY_IS_SIGNED_IN = "isSignedIn";
+    public static final String KEY_RESERVATION_ID = "reservationId";
     public static final String KEY_USER_ID = "userId";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_FCM_TOKEN = "fcmToken";
@@ -38,7 +45,7 @@ public class Constants {
             remoteMsgHeaders = new HashMap<>();
             remoteMsgHeaders.put(
                     REMOTE_MSG_AUTHORIZATION,
-                    "key=1dd15d9e2b7b3a1f85ddfb55e5ac8bc60e8d3de6"
+                    "key=AAAAqbR-ZMI:APA91bFvEqfDUjkhJ5ln7PvD3Jtp3ej6i2J_cLR2RT4YTKVmnqlnYZmMgXSXy_uh82KuAkhg-BEimDV7lSTKDxGrNRTzXT7dm1vGIbL1qsoV5IvIKWU58q43bVQkfsnsWHIKt0o4jfSm"
             );
             remoteMsgHeaders.put(
                     REMOTE_MSG_CONTENT,
