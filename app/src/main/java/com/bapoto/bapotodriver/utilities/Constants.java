@@ -9,7 +9,7 @@ public class Constants {
     public static final String KEY_EMAIL = "email";
     public static final String KEY_DATE = "date";
     public static final String KEY_HOUR = "hour";
-    public static final String KEY_PICK_UP = "pickuUp";
+    public static final String KEY_PICK_UP = "pickUp";
     public static final String KEY_DROP_OFF = "dropOff";
     public static final String KEY_INFOS = "infos";
     public static final String KEY_COLLECTION_RESERVATIONS = "reservations";
@@ -37,6 +37,10 @@ public class Constants {
     public static final String REMOTE_MSG_CONTENT = "Content-Type";
     public static final String REMOTE_MSG_DATA = "data";
     public static final String REMOTE_MSG_REGISTRATION = "registration_ids";
+    public static final String KEY_PRICE = "price";
+    public static final String KEY_COLLECTION_ADMIN = "admin";
+    public static final String KEY_IS_ADMIN = "isAdmin";
+    public static final String KEY_IS_DRIVER = "isDriver";
 
 
     public static HashMap<String,String> remoteMsgHeaders = null;

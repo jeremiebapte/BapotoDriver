@@ -3,6 +3,8 @@
     <color name="primary">#1C2E46</color>
     <color name="primary_dark">#142232</color>
     <color name="primary_text">#212121</color>
+    <color name="primary_reservation">#292929</color>
+    <color name="colorAccent">#FDBE3B</color>
     <color name="secondary_text">#757575</color>
     <color name="white">#FFFFFF</color>
     <color name="input_background">#ECECEC</color>

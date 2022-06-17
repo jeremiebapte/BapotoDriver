@@ -1,4 +1,4 @@
-package com.bapoto.bapotodriver.activities;
+package com.bapoto.bapotodriver.activities.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,51 +8,47 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
-
-import com.bapoto.bapotodriver.activities.admin.ProfileAdminActivity;
-import com.bapoto.bapotodriver.databinding.ActivitySignInBinding;
+import com.bapoto.bapotodriver.R;
+import com.bapoto.bapotodriver.databinding.ActivitySignInAdminBinding;
 import com.bapoto.bapotodriver.utilities.Constants;
 import com.bapoto.bapotodriver.utilities.PreferenceManager;
-
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+public class SignInAdminActivity extends AppCompatActivity {
 
-
-public class SignInActivity extends AppCompatActivity {
-
-    private ActivitySignInBinding binding;
+    private ActivitySignInAdminBinding binding;
     private PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySignInBinding.inflate(getLayoutInflater());
+        binding = ActivitySignInAdminBinding.inflate(getLayoutInflater());
         preferenceManager = new PreferenceManager(this);
-        if (preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)){
-            Intent intent = new Intent(this, ProfileDriverActivity.class);
+
+        if (preferenceManager.getBoolean(Constants.KEY_IS_ADMIN)) {
+            Intent intent = new Intent(this, ProfileAdminActivity.class);
             startActivity(intent);
             finish();
         }
-
         setContentView(binding.getRoot());
         setListeners();
     }
 
-    private void setListeners() {
-        binding.textCreateNewAccount.setOnClickListener(view ->
-                startActivity(new Intent(getApplicationContext(),SignUpActivity.class)));
+
+    private  void setListeners() {
+        binding.textCreateNewAccount.setOnClickListener(view -> startActivity(new Intent(this, SignUpAdminActivity.class)));
         binding.buttonSignIn.setOnClickListener(view -> {
             if (isValidSignInDetails()) {
-                signIn();
+                signInAdmin();
             }
         });
     }
 
-    private void signIn(){
+    private void signInAdmin(){
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_USERS)
+        database.collection(Constants.KEY_COLLECTION_ADMIN)
                 .whereEqualTo(Constants.KEY_EMAIL,binding.inputEmail.getText().toString())
                 .whereEqualTo(Constants.KEY_PASSWORD,binding.inputPassword.getText().toString())
                 .get()
@@ -60,21 +56,20 @@ public class SignInActivity extends AppCompatActivity {
                     if (task.isSuccessful() && task.getResult() != null
                             && task.getResult().getDocuments().size() > 0) {
                         DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                        preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
+                        preferenceManager.putBoolean(Constants.KEY_IS_ADMIN,true);
                         preferenceManager.putString(Constants.KEY_USER_ID,documentSnapshot.getId());
                         preferenceManager.putString(Constants.KEY_NAME,documentSnapshot.getString(Constants.KEY_NAME));
                         preferenceManager.putString(Constants.KEY_IMAGE,documentSnapshot.getString(Constants.KEY_IMAGE));
-                        Intent intent = new Intent(this, MainActivity.class);
+                        Intent intent = new Intent(this, ProfileAdminActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-                    }else {
+                    } else {
                         loading(false);
                         showToast("Enregistrement Impossible");
                     }
                 });
 
     }
-
 
     private void loading(Boolean isLoading){
         if (isLoading){
@@ -85,8 +80,9 @@ public class SignInActivity extends AppCompatActivity {
             binding.progressBar.setVisibility(View.INVISIBLE);
         }
     }
+
     private void showToast(String message) {
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private Boolean isValidSignInDetails() {
@@ -103,5 +99,4 @@ public class SignInActivity extends AppCompatActivity {
             return true;
         }
     }
-
 }

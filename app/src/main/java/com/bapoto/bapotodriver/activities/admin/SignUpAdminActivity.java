@@ -1,4 +1,4 @@
-package com.bapoto.bapotodriver.activities;
+package com.bapoto.bapotodriver.activities.admin;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,9 +15,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bapoto.bapotodriver.activities.admin.PasswordAdminActivity;
-import com.bapoto.bapotodriver.databinding.ActivitySignUpBinding;
-
+import com.bapoto.bapotodriver.databinding.ActivitySignUpAdminBinding;
 import com.bapoto.bapotodriver.utilities.Constants;
 import com.bapoto.bapotodriver.utilities.PreferenceManager;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,23 +25,23 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpAdminActivity extends AppCompatActivity {
 
-    private ActivitySignUpBinding binding;
+    private ActivitySignUpAdminBinding binding;
     private PreferenceManager preferenceManager;
     private String encodedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySignUpBinding.inflate(getLayoutInflater());
+        binding = ActivitySignUpAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(this);
         setListeners();
     }
 
-    private void setListeners(){
-        binding.textSignIn.setOnClickListener(view -> onBackPressed());
+    private void setListeners() {
+
         binding.buttonSignUp.setOnClickListener(view -> {
             if (isValidSignedUpDetails()) {
                 signUp();
@@ -54,40 +52,43 @@ public class SignUpActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             pickImage.launch(intent);
         });
-        binding.textAddAdmin.setOnClickListener(view -> {
-            Intent intent = new Intent(this, PasswordAdminActivity.class);
-            startActivity(intent);
+
+        binding.textSignInAdmin.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), SignInAdminActivity.class));
         });
+
     }
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
     }
 
     private void signUp() {
         loading(true);
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        HashMap<String,Object> user = new HashMap<>();
-        user.put(Constants.KEY_NAME, binding.inputName.getText().toString());
-        user.put(Constants.KEY_EMAIL,binding.inputEmail.getText().toString());
-        user.put(Constants.KEY_PASSWORD,binding.inputPassword.getText().toString());
-        user.put(Constants.KEY_IMAGE,encodedImage);
-        database.collection(Constants.KEY_COLLECTION_USERS)
-                .add(user)
+        FirebaseFirestore db  = FirebaseFirestore.getInstance();
+        HashMap<String, Object> admin = new HashMap<>();
+        admin.put(Constants.KEY_NAME, binding.inputName.getText().toString());
+        admin.put(Constants.KEY_EMAIL,binding.inputEmail.getText().toString());
+        admin.put(Constants.KEY_PASSWORD,binding.inputPassword.getText().toString());
+        admin.put(Constants.KEY_IMAGE,encodedImage);
+        db.collection(Constants.KEY_COLLECTION_ADMIN)
+                .add(admin)
                 .addOnSuccessListener(documentReference -> {
-                loading(false);
-                preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
-                preferenceManager.putBoolean(Constants.KEY_IS_DRIVER,true);
-                preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
-                preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString());
-                preferenceManager.putString(Constants.KEY_IMAGE,encodedImage);
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                    loading(false);
+                    preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
+                    preferenceManager.putBoolean(Constants.KEY_IS_ADMIN,true);
+                    preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
+                    preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString());
+                    preferenceManager.putString(Constants.KEY_EMAIL,binding.inputEmail.getText().toString());
+                    preferenceManager.putString(Constants.KEY_IMAGE,encodedImage);
+                    Intent intent = new Intent(this, ProfileAdminActivity.MainActivityReservation.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 })
                 .addOnFailureListener(e -> {
-                loading(false);
-                e.getMessage();
+                    loading(false);
+                    showToast(e.getMessage());
                 });
     }
 

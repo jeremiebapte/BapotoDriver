@@ -8,7 +8,9 @@
     android:overScrollMode="never"
     android:padding="@dimen/_24sdp"
     android:scrollbars="none"
-    tools:context=".activities.SignInActivity">
+    tools:context=".activities.admin.SignInAdminActivity">
+
+
 
 
     <LinearLayout
@@ -25,8 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_40sdp"
-            android:text="@string/content_de_vous_revoir"
-            android:textColor="@color/primary_text"
+            android:text="@string/administrateur"
+            android:textColor="@color/colorNoteColor5"
             android:textSize="@dimen/_18ssp"
             android:textStyle="bold"/>
 
@@ -83,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 android:text="@string/sign_in"
-                android:textColor="@color/white"
+                android:textColor="@color/colorNoteColor5"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
                 app:cornerRadius="@dimen/_8sdp"/>
@@ -96,25 +98,16 @@
                 android:visibility="invisible"/>
 
         </FrameLayout>
-        
-        
-
-
         <TextView
             android:id="@+id/textCreateNewAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_30sdp"
-            android:text="@string/create_new_account"
-            android:textColor="@color/primary"
+            android:text="@string/new_admin"
+            android:textColor="@color/colorNoteColor5"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"/>
 
-
-
-
     </LinearLayout>
-
-
 
 </ScrollView>

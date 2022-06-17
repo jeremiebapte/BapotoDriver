@@ -5,10 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_reservation"
-    tools:context=".activities.MainActivity">
-
-
-
+    tools:context=".activities.admin.ProfileAdminActivity$MainActivityReservation">
+    
     <TextView
         android:id="@+id/textReservation"
         android:layout_width="match_parent"
@@ -17,9 +15,8 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:fontFamily="@font/ubuntu_bold"
-        android:gravity="center"
         android:includeFontPadding="false"
-        android:text="@string/r_servations_available"
+         android:text="@string/r_servations"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -44,8 +41,8 @@
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_search"
             app:tint="@color/white" />
-
-
+        
+        
         <EditText
             android:id="@+id/inputSearch"
             android:layout_width="match_parent"
@@ -62,7 +59,7 @@
             android:textColorHint="@color/colorTextHint"
             android:textSize="@dimen/_13ssp"/>
 
-    </LinearLayout>
+     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reservationRecyclerView"
@@ -99,8 +96,21 @@
 
 
     </LinearLayout>
-
-
+    
+    
+    <ImageView
+        android:id="@+id/addReservationMain"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:background="@drawable/background_add_button"
+        android:contentDescription="@string/app_name"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toTopOf="@id/layoutQuickActions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/primary"
+        app:layout_constraintTop_toTopOf="@id/layoutQuickActions" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

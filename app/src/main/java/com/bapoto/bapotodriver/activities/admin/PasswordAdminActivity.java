@@ -1,4 +1,4 @@
-package com.bapoto.bapotodriver.activities;
+package com.bapoto.bapotodriver.activities.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,17 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.bapoto.bapotodriver.databinding.ActivitySignUpAdminBinding;
+import com.bapoto.bapotodriver.activities.admin.SignUpAdminActivity;
+import com.bapoto.bapotodriver.databinding.ActivityPasswordAdminBinding;
 
-public class SignUpAdminActivity extends AppCompatActivity {
 
-    private ActivitySignUpAdminBinding binding;
+public class PasswordAdminActivity extends AppCompatActivity {
+
+    private ActivityPasswordAdminBinding binding;
     private static final String PASSWORD = "Bapoto92";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySignUpAdminBinding.inflate(getLayoutInflater());
+        binding = ActivityPasswordAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListeners();
     }
@@ -25,7 +27,7 @@ public class SignUpAdminActivity extends AppCompatActivity {
     private void setListeners() {
        binding.buttonSignIn.setOnClickListener(view ->{
                 if (isValidPassword()) {
-                    startActivity(new Intent(getApplicationContext(),AdminActivity.class)); }
+                    startActivity(new Intent(getApplicationContext(), SignUpAdminActivity.class)); }
                });
 
     }

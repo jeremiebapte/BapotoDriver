@@ -1,5 +1,6 @@
 package com.bapoto.bapotodriver.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.bapoto.bapotodriver.activities.admin.PasswordAdminActivity;
 import com.bapoto.bapotodriver.activities.network.ApiClient;
 import com.bapoto.bapotodriver.activities.network.ApiService;
 import com.bapoto.bapotodriver.adapters.ChatAdapter;
@@ -257,6 +259,7 @@ public class ChatActivity extends BaseActivity {
     private void setListeners() {
         binding.imageBack.setOnClickListener(view -> onBackPressed());
         binding.layoutSend.setOnClickListener(view -> sendMessage());
+        binding.imageInfo.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), PasswordAdminActivity.class)));
     }
 
     private String getReadableDateTime(Date date) {

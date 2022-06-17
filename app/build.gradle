@@ -51,6 +51,8 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-messaging:23.0.5'
     implementation 'com.google.firebase:firebase-firestore:24.1.2'
+    implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
+
 
     //MultiDex
     implementation 'androidx.multidex:multidex:2.0.1'

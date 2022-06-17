@@ -42,7 +42,7 @@ public class UsersActivity extends BaseActivity implements UserListener {
     private void getUsers() {
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_USERS)
+        database.collection(Constants.KEY_COLLECTION_ADMIN)
                 .get()
                 .addOnCompleteListener(task -> {
                     loading(false);
@@ -94,3 +94,5 @@ public class UsersActivity extends BaseActivity implements UserListener {
         finish();
     }
 }
+
+// TODO affichage d'un message quand il n'y a pas de conversation commencées ou de reservations prise dans le profil
