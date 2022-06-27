@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import com.bapoto.bapotodriver.adapters.ReservationAdapter;
 import com.bapoto.bapotodriver.databinding.ActivityAdminBinding;
 import com.bapoto.bapotodriver.utilities.Constants;
 import com.bapoto.bapotodriver.utilities.PreferenceManager;
@@ -15,7 +17,8 @@ import java.util.HashMap;
 public class AdminActivity extends AppCompatActivity {
 
     private ActivityAdminBinding binding;
-    PreferenceManager preferenceManager ;
+    PreferenceManager preferenceManager;
+    private ReservationAdapter.ReservationHolder adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,4 +57,7 @@ public class AdminActivity extends AppCompatActivity {
                 .addOnFailureListener(Throwable::getMessage);
 
     }
+
+
+
 }

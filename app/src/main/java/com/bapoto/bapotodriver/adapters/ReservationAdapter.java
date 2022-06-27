@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
 import com.bapoto.bapotodriver.R;
 import com.bapoto.bapotodriver.activities.ProfileDriverActivity;
@@ -22,6 +23,7 @@ import com.bapoto.bapotodriver.utilities.Constants;
 import com.bapoto.bapotodriver.utilities.PreferenceManager;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.type.Date;
@@ -32,6 +34,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, ReservationAdapter.ReservationHolder>{
+   private OnItemClickListener listener;
 
 
     public ReservationAdapter(@NonNull FirestoreRecyclerOptions<Reservation> options) {
@@ -59,12 +62,10 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
         getSnapshots().getSnapshot(position).getReference().delete();
     }
 
-    static class ReservationHolder extends RecyclerView.ViewHolder {
-    TextView tvPickUp,tvDropOff,tvDate, tvHour,tvPrice,tvMessageAccepted;
-    Button okBtn;
-    private PreferenceManager preferenceManager;
-        private Admin admin;
-        private Date date;
+     public class ReservationHolder extends RecyclerView.ViewHolder {
+        TextView tvPickUp,tvDropOff,tvDate, tvHour,tvPrice,tvMessageAccepted;
+        Button okBtn;
+
 
         public ReservationHolder(View itemView) {
             super(itemView);
@@ -75,79 +76,87 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
             tvPrice = itemView.findViewById(R.id.tvPrice);
             okBtn = itemView.findViewById(R.id.acceptRide);
             tvMessageAccepted = itemView.findViewById(R.id.rideAccepted);
-            okBtn.setOnClickListener(view -> {
-                alertAcceptRide();
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getBindingAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onItemClick(getSnapshots().getSnapshot(position),position );
+
+                    }
+                }
             });
         }
-
-        private void alertAcceptRide() {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(itemView.getContext());
-
-            // set title
-            alertDialogBuilder.setTitle("Réservation");
-            alertDialogBuilder.setIcon(R.drawable.ic_thumb_up);
-
-            // set dialog message
-            alertDialogBuilder
-                    .setMessage("Accepter cette réservation?")
-                    .setCancelable(false)
-                    .setPositiveButton("Oui !", (dialog, id) -> {
-                        // if this button is clicked, close
-                        // current activity
-                        assignRide();
-                        updateRide();
-
-                    })
-                    .setNegativeButton("Non", (dialog, id) -> {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
-                        dialog.cancel();
-                    });
-
-            // create alert dialog
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            // show it
-            alertDialog.show();
-        }
-
-        private void updateRide() {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        }
-
-        private void assignRide() {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MMMM/yyyy");
-            java.util.Date date = new java.util.Date();
-            PreferenceManager preferenceManager = new PreferenceManager(itemView.getContext());
-            HashMap<String, Object> ride = new HashMap<>();
-            ride.put(Constants.KEY_ACCEPTED_BY,preferenceManager.getString(Constants.KEY_NAME));
-            ride.put(Constants.KEY_DATE,dateFormat.format(date));
-            db.collection(Constants.KEY_COLLECTION_RIDE_ACCEPTED)
-                    .add(ride)
-                    .addOnSuccessListener(documentReference -> {
-                        preferenceManager.putBoolean(Constants.IS_ACCEPTED,true);
-                    });
-        if(preferenceManager.getBoolean(Constants.IS_ACCEPTED)) {
-          showAcceptedRideMessage();
-
-        }
-        }
-
-        private void showAcceptedRideMessage() {
-            okBtn.setVisibility(View.INVISIBLE);
-            tvMessageAccepted.setVisibility(View.VISIBLE);
-
-        }
-
     }
 
+    public interface OnItemClickListener{
+        void onItemClick(DocumentSnapshot documentSnapshot,int position);
+    }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
 }
 
 
 
+
+
+    /*private void alertAcceptRide() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(itemView.getContext());
+
+        // set title
+        alertDialogBuilder.setTitle("Réservation");
+        alertDialogBuilder.setIcon(R.drawable.ic_thumb_up);
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Accepter cette réservation?")
+                .setCancelable(false)
+                .setPositiveButton("Oui !", (dialog, id) -> {
+                    // if this button is clicked, close
+                    // current activity
+                    assignRide();
+
+
+                })
+                .setNegativeButton("Non", (dialog, id) -> {
+                    // if this button is clicked, just close
+                    // the dialog box and do nothing
+                    dialog.cancel();
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
+    }
+
+    public void assignRide() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        PreferenceManager preferenceManager = new PreferenceManager(itemView.getContext());
+        HashMap<String,Object> update = new HashMap<>();
+        update.put(Constants.IS_ACCEPTED,true);
+        update.put(Constants.KEY_ACCEPTED_BY,preferenceManager.getString(Constants.KEY_NAME));
+        CollectionReference ref = db.collection(Constants.KEY_COLLECTION_RESERVATIONS)
+                .getId()
+                .toString()
+        ref.document(ref.document().getId())
+                .update(update)
+                .addOnSuccessListener(unused -> {
+                    preferenceManager.putBoolean(Constants.IS_ACCEPTED,true);
+
+                });
+
+    }
+
+    private void showAcceptedRideMessage() {
+        okBtn.setVisibility(View.INVISIBLE);
+        tvMessageAccepted.setVisibility(View.VISIBLE);
+
+    }*/
 
 
 

@@ -18,10 +18,11 @@ import com.bapoto.bapotodriver.databinding.ActivityMainReservationBinding;
 import com.bapoto.bapotodriver.models.Reservation;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class MainReservationActivity extends AppCompatActivity {
+public class MainReservationActivity extends AppCompatActivity  {
 
     private ActivityMainReservationBinding binding;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -89,7 +90,8 @@ public class MainReservationActivity extends AppCompatActivity {
                 adapter.deleteItem(viewHolder.getAbsoluteAdapterPosition());
             }
         }).attachToRecyclerView(recyclerView);
-
     }
+
+
 
 }
