@@ -47,7 +47,7 @@ public class AdminActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentReference -> {
                     preferenceManager.putString(Constants.KEY_RESERVATION_ID,documentReference.getId());
                     preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString());
-                    Intent intent = new Intent(this, ProfileAdminActivity.MainActivityReservation.class);
+                    Intent intent = new Intent(this, ProfileAdminActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 })

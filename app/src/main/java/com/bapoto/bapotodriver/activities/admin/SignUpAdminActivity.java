@@ -82,7 +82,7 @@ public class SignUpAdminActivity extends AppCompatActivity {
                     preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString());
                     preferenceManager.putString(Constants.KEY_EMAIL,binding.inputEmail.getText().toString());
                     preferenceManager.putString(Constants.KEY_IMAGE,encodedImage);
-                    Intent intent = new Intent(this, ProfileAdminActivity.MainActivityReservation.class);
+                    Intent intent = new Intent(this, ProfileAdminActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 })

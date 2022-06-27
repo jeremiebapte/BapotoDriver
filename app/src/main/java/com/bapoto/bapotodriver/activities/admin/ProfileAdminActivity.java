@@ -83,7 +83,7 @@ public class ProfileAdminActivity extends AppCompatActivity implements Conversio
         binding.fabNewChat.setOnClickListener(view ->
                 startActivity(new Intent(this, UsersActivity.class)));
         binding.fabGoAllresa.setOnClickListener(view ->
-                startActivity(new Intent(this, MainActivityReservation.class)));
+                startActivity(new Intent(this, MainReservationActivity.class)));
 
     }
 
@@ -194,7 +194,7 @@ public class ProfileAdminActivity extends AppCompatActivity implements Conversio
         startActivity(intent);
     }
 
-    public static class MainActivityReservation extends AppCompatActivity {
+   /* public static class MainActivityReservation extends AppCompatActivity {
 
         private ActivityMainReservationBinding binding;
         private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -264,5 +264,5 @@ public class ProfileAdminActivity extends AppCompatActivity implements Conversio
             }).attachToRecyclerView(recyclerView);
 
         }
-    }
+    }*/
 }

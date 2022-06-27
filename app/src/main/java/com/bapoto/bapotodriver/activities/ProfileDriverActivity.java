@@ -56,7 +56,6 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
         getToken();
         listenConversation();
         setListeners();
-
     }
 
     private void init() {
@@ -67,13 +66,11 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
     }
 
     private void setListeners() {
-
         binding.imageSignOut.setOnClickListener(view -> signOut());
         binding.fabNewChat.setOnClickListener(view ->
                 startActivity(new Intent(this,UsersActivity.class)));
         binding.fabGoToresa.setOnClickListener(view ->
                 startActivity(new Intent(this,MainActivity.class)));
-
     }
 
     private void loadUserDetails(){
@@ -95,7 +92,6 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
                 .whereEqualTo(Constants.KEY_RECEIVER_ID,preferenceManager.getString(Constants.KEY_USER_ID))
                 .addSnapshotListener(eventListener);
     }
-
 
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
         if (error != null) {
@@ -157,7 +153,7 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
         }
 
 
-    private void signOut() {
+        private void signOut() {
         showToast("Déconnexion...");
         DocumentReference documentReference =
                     database.collection(Constants.KEY_COLLECTION_USERS)
@@ -209,6 +205,5 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
         // show it
         alertDialog.show();
     }
-
 
 }

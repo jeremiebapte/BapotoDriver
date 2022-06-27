@@ -70,6 +70,12 @@ public class ChatActivity extends BaseActivity {
         listenMessage();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listenAvailabilityOfReceiver();
+    }
+
     private void init() {
         preferenceManager = new PreferenceManager(this);
         chatMessages = new ArrayList<>();
@@ -310,9 +316,5 @@ public class ChatActivity extends BaseActivity {
         }
     };
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        listenAvailabilityOfReceiver();
-    }
+
 }

@@ -17,7 +17,7 @@
         <activity
             android:name=".activities.admin.ProfileAdminActivity"
             android:exported="false"
-            android:parentActivityName=".activities.admin.ProfileAdminActivity$MainActivityReservation"/>
+            />
         <activity
             android:name=".activities.admin.SignUpAdminActivity"
             android:exported="false" />
@@ -25,16 +25,14 @@
             android:name=".activities.MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activities.admin.ProfileAdminActivity$MainActivityReservation"
-            android:exported="false"
-            android:parentActivityName=".activities.admin.PasswordAdminActivity"
-            android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="stateHidden" />
+       <activity android:name=".activities.admin.MainReservationActivity"
+           android:exported="false"
+           android:windowSoftInputMode="adjustResize"
+           android:parentActivityName=".activities.admin.ProfileAdminActivity"/>
         <activity
             android:name=".activities.admin.AdminActivity"
             android:exported="false"
-            android:parentActivityName=".activities.admin.ProfileAdminActivity$MainActivityReservation" />
+            android:parentActivityName=".activities.admin.ProfileAdminActivity" />
         <activity
             android:name=".activities.admin.PasswordAdminActivity"
             android:exported="false" />
