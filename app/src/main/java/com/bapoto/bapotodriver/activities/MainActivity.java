@@ -3,7 +3,6 @@ package com.bapoto.bapotodriver.activities;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -15,22 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bapoto.bapotodriver.R;
 import com.bapoto.bapotodriver.adapters.ReservationAdapter;
 import com.bapoto.bapotodriver.databinding.ActivityMainBinding;
-import com.bapoto.bapotodriver.databinding.ActivityMainReservationBinding;
 import com.bapoto.bapotodriver.models.Reservation;
 import com.bapoto.bapotodriver.utilities.Constants;
+import com.bapoto.bapotodriver.utilities.PreferenceManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.util.HashMap;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private ReservationAdapter.ReservationHolder reservationHolder;
-
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference reservationRef = db.collection("reservations");
     private ReservationAdapter adapter;
@@ -54,8 +51,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    // RESERVATIONS DISPONIBLES
     private void setupRecyclerView() {
-        Query query = reservationRef.orderBy("date", Query.Direction.DESCENDING);
+        Query query = reservationRef.whereEqualTo("isAccepted",false);
+
 
         FirestoreRecyclerOptions<Reservation> options = new FirestoreRecyclerOptions.Builder<Reservation>()
                 .setQuery(query,Reservation.class)
@@ -68,23 +68,24 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new ReservationAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                alertAcceptRide();
-                HashMap<String, Object> update = new HashMap<>();
-                update.put(Constants.IS_ACCEPTED,true);
-                documentSnapshot.getReference()
-                        .update(update);
-                //showAcceptedRide();
-            }
-        });
+        adapter.setOnItemClickListener((documentSnapshot, position) -> alertAcceptRide());
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     private void alertAcceptRide() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
+        PreferenceManager preferenceManager = new PreferenceManager(this);
         // set title
         alertDialogBuilder.setTitle("RESERVATION");
         alertDialogBuilder.setIcon(R.drawable.ic_thumb_up);
@@ -96,18 +97,9 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Oui !", (dialog, id) -> {
                     // if this button is clicked, close
                     // current activity
-                    adapter.setOnItemClickListener(new ReservationAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-
-                            HashMap<String, Object> update = new HashMap<>();
-                            update.put(Constants.IS_ACCEPTED,true);
-                            documentSnapshot.getReference()
-                                    .update(update);
-
-
-                            //showAcceptedRide();
-                        }
+                    adapter.setOnItemClickListener((documentSnapshot, position) -> {
+                        String docId = documentSnapshot.getId();
+                        updateRide(docId,preferenceManager.getString(Constants.KEY_USER_ID));
 
                     });
                 })
@@ -123,26 +115,17 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-   /* private void showAcceptedRide() {
-        View itemView = new View(get);
-        okBtn = itemView.findViewById(R.id.acceptRide);
-        tvMessageAccepted = itemView.findViewById(R.id.rideAccepted);
+    // ASSIGNER RESERVATION
+    private void updateRide(String pathId, String driver) {
 
-        okBtn.setVisibility(View.INVISIBLE);
-        tvMessageAccepted.setVisibility(View.VISIBLE)
-
-    }*/
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
+        DocumentReference documentReference =
+                db.collection(Constants.KEY_COLLECTION_RESERVATIONS)
+                        .document(pathId);
+        documentReference.update(
+                Constants.KEY_ACCEPTED_BY,driver,
+                Constants.IS_ACCEPTED,true,
+                Constants.KEY_ACCEPTED_THE, new Date()
+        );
     }
 
 }

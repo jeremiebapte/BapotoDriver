@@ -37,11 +37,13 @@ public class AdminActivity extends AppCompatActivity {
 
     private void sendReservationToDataBase() {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
+        PreferenceManager preferenceManager = new PreferenceManager(this);
         HashMap<String, Object> reservation = new HashMap<>();
         reservation.put(Constants.KEY_NAME,binding.inputName.getText().toString());
         reservation.put(Constants.KEY_DATE,binding.inputDate.getText().toString());
         reservation.put(Constants.KEY_HOUR,binding.inputHour.getText().toString());
         reservation.put(Constants.KEY_PICK_UP,binding.inputPickUp.getText().toString());
+        reservation.put(Constants.IS_ACCEPTED,false);
         reservation.put(Constants.KEY_DROP_OFF,binding.inputDropOff.getText().toString());
         reservation.put(Constants.KEY_INFOS,binding.inputInfos.getText().toString());
         reservation.put(Constants.KEY_PRICE,binding.inputPrice.getText().toString());

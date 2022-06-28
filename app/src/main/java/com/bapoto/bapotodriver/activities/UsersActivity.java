@@ -42,7 +42,7 @@ public class UsersActivity extends BaseActivity implements UserListener {
     private void getUsers() {
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_USERS)
+        database.collection(Constants.KEY_COLLECTION_ADMIN)
                 .get()
                 .addOnCompleteListener(task -> {
                     loading(false);

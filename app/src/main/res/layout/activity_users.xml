@@ -28,7 +28,7 @@
         android:layout_marginEnd="@dimen/_90sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_6sdp"
-        android:text="@string/choose_a_driver"
+        android:text="@string/choose_a_admin"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"

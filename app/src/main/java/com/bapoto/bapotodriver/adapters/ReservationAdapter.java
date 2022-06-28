@@ -1,37 +1,19 @@
 package com.bapoto.bapotodriver.adapters;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewbinding.ViewBinding;
 
 import com.bapoto.bapotodriver.R;
-import com.bapoto.bapotodriver.activities.ProfileDriverActivity;
-import com.bapoto.bapotodriver.models.Admin;
 import com.bapoto.bapotodriver.models.Reservation;
-import com.bapoto.bapotodriver.models.User;
-import com.bapoto.bapotodriver.utilities.Constants;
-import com.bapoto.bapotodriver.utilities.PreferenceManager;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.type.Date;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
 
 public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, ReservationAdapter.ReservationHolder>{
    private OnItemClickListener listener;
@@ -77,14 +59,11 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
             okBtn = itemView.findViewById(R.id.acceptRide);
             tvMessageAccepted = itemView.findViewById(R.id.rideAccepted);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getBindingAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION && listener != null) {
-                        listener.onItemClick(getSnapshots().getSnapshot(position),position );
+            itemView.setOnClickListener(view -> {
+                int position = getBindingAdapterPosition();
+                if (position != RecyclerView.NO_POSITION && listener != null) {
+                    listener.onItemClick(getSnapshots().getSnapshot(position),position );
 
-                    }
                 }
             });
         }

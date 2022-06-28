@@ -30,4 +30,5 @@
     <string name="administrateur">ADMINISTRATEUR</string>
     <string name="select_admin">Choisir un admin</string>
     <string name="choose_a_driver">Choisir un Chauffeur</string>
+    <string name="choose_a_admin">Choisir un admin</string>
 </resources>
