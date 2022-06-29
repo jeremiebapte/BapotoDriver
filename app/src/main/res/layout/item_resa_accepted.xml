@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutResaAccepted"
+    android:layout_marginStart="@dimen/_12sdp"
+     android:layout_marginEnd="@dimen/_12sdp"
+    android:orientation="vertical"
+    android:background="@drawable/background_accepted_resa"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:text="RESERVATION DU :"
+            android:fontFamily="@font/ubuntu_regular"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp"/>
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+             android:layout_marginBottom="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="19/3/22"
+            android:fontFamily="@font/ubuntu_regular"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textPickUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:includeFontPadding="false"
+            android:text="Prise en Charge :"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+
+        <TextView
+            android:id="@+id/tvpickUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="Gryffondor"
+            android:fontFamily="@font/ubuntu_regular"
+            android:textColor="@color/colorTextSubtitle"
+            android:textSize="@dimen/_12ssp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textDropOff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:text="Destination :"
+            android:fontFamily="@font/ubuntu_regular"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"/>
+
+        <TextView
+            android:id="@+id/tvDropOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="Winterfell"
+            android:fontFamily="@font/ubuntu_regular"
+            android:textColor="@color/colorTextSubtitle"
+            android:textSize="@dimen/_12ssp"/>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/textHour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:text="Heure :"
+            android:fontFamily="@font/ubuntu_regular"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"/>
+
+        <TextView
+            android:id="@+id/tvHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="18H"
+            android:textColor="@color/colorTextSubtitle"
+            android:textSize="@dimen/_12ssp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:includeFontPadding="false"
+            android:text="Prix :"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="50"
+            android:textColor="@color/colorTextSubtitle"
+            android:textSize="@dimen/_12ssp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textAcceptedDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_100sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:fontFamily="@font/ubuntu_medium"
+            android:includeFontPadding="false"
+            android:text="Réservation acceptée le :"
+            android:textColor="@color/colorTextSubtitle"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:id="@+id/tvAcceptedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="19/4/22"
+            android:textColor="@color/colorTextSubtitle"
+            android:textSize="@dimen/_10ssp"/>
+
+    </LinearLayout>
+</LinearLayout>
