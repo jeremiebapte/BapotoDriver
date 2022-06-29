@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bapoto.bapotodriver.R;
+import com.bapoto.bapotodriver.activities.admin.AdminsActivity;
 import com.bapoto.bapotodriver.adapters.RecentConversationAdapter;
+import com.bapoto.bapotodriver.adapters.ReservationAcceptedAdapter;
 import com.bapoto.bapotodriver.adapters.ReservationAdapter;
 import com.bapoto.bapotodriver.databinding.ActivityProfileDriverBinding;
 import com.bapoto.bapotodriver.listeners.ConversionListener;
@@ -45,7 +47,7 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
     private ActivityProfileDriverBinding binding;
     private PreferenceManager preferenceManager;
     private List<ChatMessage> conversations;
-    private ReservationAdapter adapter;
+    private ReservationAcceptedAdapter adapter;
     private RecentConversationAdapter conversationAdapter;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference reservationRef = db.collection(Constants.KEY_COLLECTION_RESERVATIONS);
@@ -75,7 +77,7 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
     private void setListeners() {
         binding.imageSignOut.setOnClickListener(view -> signOut());
         binding.fabNewChat.setOnClickListener(view ->
-                startActivity(new Intent(this,UsersActivity.class)));
+                startActivity(new Intent(this, AdminsActivity.class)));
         binding.fabGoToresa.setOnClickListener(view ->
                 startActivity(new Intent(this,MainActivity.class)));
     }
@@ -158,7 +160,7 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
                 .setQuery(query, Reservation.class)
                 .build();
 
-        adapter = new ReservationAdapter(options);
+        adapter = new ReservationAcceptedAdapter(options);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = findViewById(R.id.rideAcceptedRecyclerView);

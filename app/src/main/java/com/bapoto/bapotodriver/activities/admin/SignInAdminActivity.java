@@ -35,7 +35,6 @@ public class SignInAdminActivity extends AppCompatActivity {
         setListeners();
     }
 
-
     private  void setListeners() {
         binding.textCreateNewAccount.setOnClickListener(view -> startActivity(new Intent(this, SignUpAdminActivity.class)));
         binding.buttonSignIn.setOnClickListener(view -> {

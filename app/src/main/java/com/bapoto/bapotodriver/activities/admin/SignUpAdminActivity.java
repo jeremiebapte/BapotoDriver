@@ -53,9 +53,7 @@ public class SignUpAdminActivity extends AppCompatActivity {
             pickImage.launch(intent);
         });
 
-        binding.textSignInAdmin.setOnClickListener(view -> {
-            startActivity(new Intent(getApplicationContext(), SignInAdminActivity.class));
-        });
+        binding.textSignInAdmin.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SignInAdminActivity.class)));
 
     }
 

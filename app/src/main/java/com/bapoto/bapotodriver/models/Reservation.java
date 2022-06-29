@@ -14,6 +14,7 @@ public class Reservation {
     private String hour;
     private String date;
     private String price;
+    private String dayAccepted;
     @Nullable
     private String infos;
     private User sender;
@@ -23,7 +24,7 @@ public class Reservation {
 
 
     public Reservation(String name, String telephone, @Nullable String email, String pickUp, String dropOff,
-                       String hour, String date, @Nullable String infos) {
+                       String hour, String date, @Nullable String infos, String dayAccepted) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
@@ -32,9 +33,10 @@ public class Reservation {
         this.hour = hour;
         this.date = date;
         this.infos = infos;
+        this.dayAccepted = dayAccepted;
     }
 
-    public Reservation(String nom, String tel, String desti, String rdv, String date, String hour, String infos, User sender) {
+    public Reservation(String nom, String tel, String desti, String rdv, String date, String hour, String infos, String dayAccepted, User sender) {
     }
 
     public String getName() {
@@ -117,5 +119,13 @@ public class Reservation {
 
     public void setInfos(@Nullable String infos) {
         this.infos = infos;
+    }
+
+    public String getDayAccepted() {
+        return dayAccepted;
+    }
+
+    public void setDayAccepted(String dayAccepted) {
+        this.dayAccepted = dayAccepted;
     }
 }

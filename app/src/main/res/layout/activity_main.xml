@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_reservation"
+    android:background="@color/primary"
     tools:context=".activities.MainActivity">
 
 
@@ -24,6 +24,14 @@
         android:textSize="@dimen/_20ssp"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@drawable/background_content_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textReservation">
+
     <LinearLayout
         android:id="@+id/layoutSearch"
         android:layout_width="match_parent"
@@ -38,51 +46,31 @@
         android:paddingEnd="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@id/textReservation">
 
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_search"
-            app:tint="@color/white" />
 
-
-        <EditText
-            android:id="@+id/inputSearch"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:background="@null"
-            android:fontFamily="@font/ubuntu_regular"
-            android:hint="Rechercher"
-            android:imeOptions="actionDone"
-            android:importantForAutofill="no"
-            android:includeFontPadding="false"
-            android:inputType="text"
-            android:textColor="@color/white"
-            android:textColorHint="@color/colorTextHint"
-            android:textSize="@dimen/_13ssp"/>
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reservationRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_2sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
-        android:clipToPadding="false"
-        android:paddingStart="0dp"
-        android:paddingEnd="@dimen/_12sdp"
-        android:paddingBottom="@dimen/_12sdp"
-        app:layout_constraintBottom_toTopOf="@id/layoutQuickActions"
-        app:layout_constraintTop_toBottomOf="@id/layoutSearch"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reservationRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="371dp"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:clipToPadding="false"
+            android:paddingStart="0dp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            app:layout_constraintBottom_toTopOf="@id/layoutQuickActions"
+            app:layout_constraintTop_toBottomOf="@id/textReservation" />
+
+    </FrameLayout>
 
 
     <LinearLayout
         android:id="@+id/layoutQuickActions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorQuickActionBackGround"
+        android:background="@color/colorTextSubtitle"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="@dimen/_15sdp"
@@ -90,10 +78,10 @@
 
         <ImageView
             android:id="@+id/imageOpenChat"
-            android:layout_width="@dimen/_23sdp"
-            android:layout_height="@dimen/_23sdp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_chat"
+            android:src="@drawable/ic_account_circle"
             app:tint="@color/colorIcons" />
 
 

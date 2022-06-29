@@ -33,7 +33,7 @@
         android:src="@drawable/ic_logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:tint="@color/white"/>
+        android:tint="@color/colorNoteColor3"/>
 
     <TextView
         android:id="@+id/textName"
@@ -151,7 +151,8 @@
         android:layout_marginBottom="@dimen/_24sdp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_add"
-        android:backgroundTint="@color/primary"
+        app:rippleColor="@color/white"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:tint="@color/white"/>
@@ -167,7 +168,7 @@
         android:layout_marginBottom="@dimen/_24sdp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_car"
-        android:backgroundTint="@color/primary"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:tint="@color/white"/>

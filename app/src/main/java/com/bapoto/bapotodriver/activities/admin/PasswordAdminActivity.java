@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.bapoto.bapotodriver.activities.admin.SignUpAdminActivity;
 import com.bapoto.bapotodriver.databinding.ActivityPasswordAdminBinding;
 
 
@@ -23,7 +22,6 @@ public class PasswordAdminActivity extends AppCompatActivity {
         setListeners();
     }
 
-
     private void setListeners() {
        binding.buttonSignIn.setOnClickListener(view ->{
                 if (isValidPassword()) {
@@ -32,11 +30,7 @@ public class PasswordAdminActivity extends AppCompatActivity {
 
     }
 
-
-    private void showToast() {
-        Toast.makeText(this, "Entrez le mot de passe", Toast.LENGTH_SHORT).show();
-    }
-
+    // CHECK POUR ACCEDER A LA PARTIE ADMIN
     private Boolean isValidPassword() {
         if (binding.inputPassword.getText().toString().isEmpty()) {
             showToast();
@@ -47,5 +41,9 @@ public class PasswordAdminActivity extends AppCompatActivity {
         }else {
             return true;
         }
+    }
+
+    private void showToast() {
+        Toast.makeText(this, "Entrez le mot de passe", Toast.LENGTH_SHORT).show();
     }
 }

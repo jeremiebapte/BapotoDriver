@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.40260416666666665" />
+        <entry key="app/src/main/res/drawable/background_accepted_resa.xml" value="0.241" />
         <entry key="app/src/main/res/drawable/background_add_button.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/background_chat_input.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/background_content_bottom.xml" value="0.2535" />
@@ -16,16 +17,22 @@
         <entry key="app/src/main/res/drawable/background_search.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/background_sent_message.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/background_subtitle.xml" value="0.2535" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.241" />
         <entry key="app/src/main/res/drawable/ic_add_outline.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.2535" />
+        <entry key="app/src/main/res/drawable/ic_car.xml" value="0.241" />
+        <entry key="app/src/main/res/drawable/ic_chat.xml" value="0.241" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/ic_sad.xml" value="0.241" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.2175" />
+        <entry key="app/src/main/res/drawable/item_container_accepted_reservations.xml" value="0.241" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/activity_admins.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_conversation.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_create_reservation.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/activity_drivers.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_main_reservation.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_password_admin.xml" value="0.3614583333333333" />
@@ -41,6 +48,7 @@
         <entry key="app/src/main/res/layout/item_container_reservation.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_container_sent_message.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/item_container_user.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/item_resa_accepted.xml" value="0.335" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.194" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.194" />
       </map>

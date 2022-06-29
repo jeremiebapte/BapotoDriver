@@ -16,9 +16,9 @@ import com.bapoto.bapotodriver.R;
 import com.bapoto.bapotodriver.adapters.ReservationAdapter;
 import com.bapoto.bapotodriver.databinding.ActivityMainReservationBinding;
 import com.bapoto.bapotodriver.models.Reservation;
+import com.bapoto.bapotodriver.utilities.Constants;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -26,7 +26,7 @@ public class MainReservationActivity extends AppCompatActivity  {
 
     private ActivityMainReservationBinding binding;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final CollectionReference reservationRef = db.collection("reservations");
+    private final CollectionReference reservationRef = db.collection(Constants.KEY_COLLECTION_RESERVATIONS);
     private ReservationAdapter adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -39,22 +39,10 @@ public class MainReservationActivity extends AppCompatActivity  {
         setupRecyclerView();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void setListeners() {
         binding.addReservationMain.setOnClickListener(view -> {
-            Intent intent = new Intent(this, AdminActivity.class);
+            Intent intent = new Intent(this, SendReservationActivity.class);
             startActivity(intent);
             finish();
         });
@@ -65,6 +53,7 @@ public class MainReservationActivity extends AppCompatActivity  {
         });
     }
 
+    // VOIR TOUTES LES RESERVATIONS
     private void setupRecyclerView() {
         Query query = reservationRef.orderBy("date", Query.Direction.DESCENDING);
 
@@ -92,6 +81,17 @@ public class MainReservationActivity extends AppCompatActivity  {
         }).attachToRecyclerView(recyclerView);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
 
 
 }

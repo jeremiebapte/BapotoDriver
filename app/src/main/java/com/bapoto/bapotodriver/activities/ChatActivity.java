@@ -88,6 +88,12 @@ public class ChatActivity extends BaseActivity {
         database = FirebaseFirestore.getInstance();
     }
 
+    private void setListeners() {
+        binding.imageBack.setOnClickListener(view -> onBackPressed());
+        binding.layoutSend.setOnClickListener(view -> sendMessage());
+        binding.imageInfo.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), PasswordAdminActivity.class)));
+    }
+
     private void sendMessage() {
         HashMap <String, Object> message = new HashMap<>();
         message.put(Constants.KEY_SENDER_ID,preferenceManager.getString(Constants.KEY_USER_ID));
@@ -260,12 +266,6 @@ public class ChatActivity extends BaseActivity {
     private void loadReceiverDetails() {
         receiverUser = (User) getIntent().getSerializableExtra(Constants.KEY_USER);
         binding.textName.setText(receiverUser.name);
-    }
-
-    private void setListeners() {
-        binding.imageBack.setOnClickListener(view -> onBackPressed());
-        binding.layoutSend.setOnClickListener(view -> sendMessage());
-        binding.imageInfo.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), PasswordAdminActivity.class)));
     }
 
     private String getReadableDateTime(Date date) {
