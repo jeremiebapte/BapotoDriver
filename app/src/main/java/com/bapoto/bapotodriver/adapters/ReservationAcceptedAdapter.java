@@ -28,7 +28,7 @@ public class ReservationAcceptedAdapter extends FirestoreRecyclerAdapter<Reserva
             holder.tvDropOff.setText(model.getDropOff());
             holder.tvHour.setText(model.getHour());
             holder.tvPrice.setText(model.getPrice());
-            holder.tvDateAccepted.setText(model.getDayAccepted());
+            //holder.tvDateAccepted.setText(model.getDayAccepted());
     }
 
     @NonNull

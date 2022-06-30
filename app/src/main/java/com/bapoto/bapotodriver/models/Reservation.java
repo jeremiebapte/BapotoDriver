@@ -2,6 +2,8 @@ package com.bapoto.bapotodriver.models;
 
 import androidx.annotation.Nullable;
 
+import com.google.firebase.Timestamp;
+
 public class Reservation {
 
 
@@ -14,7 +16,7 @@ public class Reservation {
     private String hour;
     private String date;
     private String price;
-    private String dayAccepted;
+    private Timestamp dayAccepted;
     @Nullable
     private String infos;
     private User sender;
@@ -24,7 +26,7 @@ public class Reservation {
 
 
     public Reservation(String name, String telephone, @Nullable String email, String pickUp, String dropOff,
-                       String hour, String date, @Nullable String infos, String dayAccepted) {
+                       String hour, String date, @Nullable String infos, Timestamp dayAccepted) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
@@ -121,11 +123,11 @@ public class Reservation {
         this.infos = infos;
     }
 
-    public String getDayAccepted() {
+    public Timestamp getDayAccepted() {
         return dayAccepted;
     }
 
-    public void setDayAccepted(String dayAccepted) {
+    public void setDayAccepted(Timestamp dayAccepted) {
         this.dayAccepted = dayAccepted;
     }
 }

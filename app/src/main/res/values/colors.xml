@@ -13,7 +13,7 @@
     <color name="received_message_background">#090D16</color>
     <color name="green">#008000</color>
     <color name="colorTextHint">#7B7B7B</color>
-    <color name="colorQuickActionBackGround">#2F2D2E</color>
+    <color name="colorQuickActionBackGround">#EFEFEF</color>
     <color name="colorIcons">#A4A4A4</color>
     <color name="colorTextSubtitle">#CECECE</color>
     <color name="colorDefaultNoteColor">#FAFAFA</color>
