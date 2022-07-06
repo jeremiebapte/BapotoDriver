@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutResa"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/_12sdp"
     android:layout_marginTop="@dimen/_12sdp"
     android:layout_marginEnd="@dimen/_12sdp"
-    android:background="@drawable/background_resa"
+    android:background="@drawable/border"
     android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/backgroun_resa_accepted"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="RÉSERVATION"
+            android:textColor="@color/colorNoteColor5"
+            android:textSize="@dimen/_18ssp" />
+
+
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,7 +54,7 @@
         android:text="Prise en Charge : "
         android:fontFamily="@font/ubuntu_regular"
         android:includeFontPadding="false"
-        android:textColor="@color/white"
+        android:textColor="@color/colorNoteColor5"
         android:textSize="@dimen/_13ssp"/>
 
         <TextView
@@ -36,10 +63,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_4sdp"
-            android:text="Arya"
             android:fontFamily="@font/ubuntu_regular"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10ssp"/>
+            android:text="Arya"
+            android:textColor="@color/colorNoteColor5"
+            android:textSize="@dimen/_10ssp" />
 
     </LinearLayout>
 
@@ -61,7 +88,7 @@
         android:text="Destination : "
         android:fontFamily="@font/ubuntu_regular"
         android:includeFontPadding="false"
-        android:textColor="@color/colorTextSubtitle"
+        android:textColor="@color/colorNoteColor5"
         android:textSize="@dimen/_13ssp"/>
 
         <TextView
@@ -69,10 +96,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
-            android:text="Stark"
+            android:layout_marginBottom="@dimen/_4sdp"
             android:fontFamily="@font/ubuntu_regular"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10ssp"/>
+            android:text="Stark"
+            android:textColor="@color/colorNoteColor5"
+            android:textSize="@dimen/_10ssp" />
 
     </LinearLayout>
 
@@ -80,6 +108,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
+    android:layout_marginBottom="@dimen/_20sdp"
     android:orientation="horizontal">
 
     <TextView
@@ -87,65 +116,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
+
         android:layout_marginBottom="@dimen/_8sdp"
         android:text="Date : "
         android:fontFamily="@font/ubuntu_regular"
         android:includeFontPadding="false"
-        android:textColor="@color/colorTextSubtitle"
+        android:textColor="@color/colorNoteColor5"
         android:textSize="@dimen/_12ssp"/>
 
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
+
         android:text="19/4/2000"
-        android:textColor="@color/white"
+        android:textColor="@color/colorNoteColor5"
         android:textSize="@dimen/_10ssp"/>
 
 
 </LinearLayout>
 
-    <TextView
-        android:id="@+id/rideAccepted"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_100sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_2sdp"
-        android:fontFamily="@font/ubuntu_medium"
-        android:gravity="center"
-        android:text="réservation acceptée"
-        android:textColor="@color/green"
-        android:visibility="invisible" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_20sdp"
         android:orientation="horizontal">
     <TextView
         android:id="@+id/textHour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginBottom="@dimen/_8sdp"
         android:text="Heure : "
         android:fontFamily="@font/ubuntu_regular"
         android:includeFontPadding="false"
-        android:textColor="@color/colorTextSubtitle"
+        android:textColor="@color/colorNoteColor5"
         android:textSize="@dimen/_12ssp"/>
 
         <TextView
             android:id="@+id/tvHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
+
             android:text="18H"
-            android:textColor="@color/white"
+            android:textColor="@color/colorNoteColor5"
             android:textSize="@dimen/_10ssp"/>
 
     </LinearLayout>
@@ -157,18 +174,18 @@
         android:layout_marginBottom="@dimen/_4sdp"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/textPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:text="Prix : "
             android:fontFamily="@font/ubuntu_regular"
             android:includeFontPadding="false"
-            android:textColor="@color/colorTextSubtitle"
-            android:textSize="@dimen/_12ssp"/>
+            android:text="Prix : "
+            android:textColor="@color/colorNoteColor5"
+            android:textSize="@dimen/_12ssp" />
 
         <TextView
             android:id="@+id/tvPrice"
@@ -176,36 +193,34 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:text="50"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10ssp"/>
-
-        <Button
-            android:id="@+id/acceptRide"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_140sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_2sdp"
-            android:backgroundTint="@color/white"
-            android:text="@string/ok"
-            android:textColor="@color/primary_dark"
             android:fontFamily="@font/ubuntu_bold"
-            android:visibility="visible"
-            />
-
-
+            android:textColor="@color/colorNoteColor5"
+            android:textSize="@dimen/_10ssp"/>
     </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textAcceptedDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_140sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+
+                android:fontFamily="@font/ubuntu_medium"
+                android:includeFontPadding="false"
+                android:text="Cliquez pour accepter "
+                android:textColor="@color/colorTextSubtitle"
+                android:textSize="@dimen/_8ssp" />
 
 
-
-
-
-
-
-
-
-
-</LinearLayout>
+        </LinearLayout>
+    </LinearLayout>

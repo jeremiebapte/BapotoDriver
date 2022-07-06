@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_reservation"
-    tools:context=".activities.admin.ProfileAdminActivity$MainActivityReservation">
+    android:background="@color/white"
+    tools:context=".activities.admin.MainReservationActivity">
     
     <TextView
         android:id="@+id/textReservation"
@@ -17,7 +17,7 @@
         android:fontFamily="@font/ubuntu_bold"
         android:includeFontPadding="false"
          android:text="@string/r_servations"
-        android:textColor="@color/white"
+        android:textColor="@color/primary"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -62,7 +62,7 @@
      </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reservationRecyclerView"
+        android:id="@+id/AdminreservationRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_2sdp"

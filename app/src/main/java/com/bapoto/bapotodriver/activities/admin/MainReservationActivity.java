@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bapoto.bapotodriver.R;
-import com.bapoto.bapotodriver.adapters.ReservationAdapter;
+import com.bapoto.bapotodriver.adapters.AdminReservationAdapter;
+
 import com.bapoto.bapotodriver.databinding.ActivityMainReservationBinding;
 import com.bapoto.bapotodriver.models.Reservation;
 import com.bapoto.bapotodriver.utilities.Constants;
@@ -27,7 +28,7 @@ public class MainReservationActivity extends AppCompatActivity  {
     private ActivityMainReservationBinding binding;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference reservationRef = db.collection(Constants.KEY_COLLECTION_RESERVATIONS);
-    private ReservationAdapter adapter;
+    private AdminReservationAdapter adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -61,9 +62,9 @@ public class MainReservationActivity extends AppCompatActivity  {
                 .setQuery(query,Reservation.class)
                 .build();
 
-        adapter = new ReservationAdapter(options);
+        adapter = new AdminReservationAdapter(options);
 
-        RecyclerView recyclerView = findViewById(R.id.reservationRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.AdminreservationRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

@@ -20,13 +20,14 @@ public class Reservation {
     @Nullable
     private String infos;
     private User sender;
+    private String driver;
 
     public Reservation() {
     }
 
 
     public Reservation(String name, String telephone, @Nullable String email, String pickUp, String dropOff,
-                       String hour, String date, @Nullable String infos, Timestamp dayAccepted) {
+                       String hour, String date, @Nullable String infos, Timestamp dayAccepted, String driver) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
@@ -36,9 +37,10 @@ public class Reservation {
         this.date = date;
         this.infos = infos;
         this.dayAccepted = dayAccepted;
+        this.driver = driver;
     }
 
-    public Reservation(String nom, String tel, String desti, String rdv, String date, String hour, String infos, String dayAccepted, User sender) {
+    public Reservation(String nom, String tel, String desti, String rdv, String date, String hour, String infos, String dayAccepted, User sender, String driver) {
     }
 
     public String getName() {
@@ -55,6 +57,14 @@ public class Reservation {
 
     public void setSender(User sender) {
         this.sender = sender;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
     }
 
     public String getTelephone() {

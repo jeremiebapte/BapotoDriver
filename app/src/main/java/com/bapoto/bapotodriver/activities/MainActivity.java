@@ -95,34 +95,29 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage("Accepter cette réservation ?")
                 .setCancelable(false)
                 .setPositiveButton("Oui !", (dialog, id) -> {
-                    // if this button is clicked, close
-                    // current activity
                     adapter.setOnItemClickListener((documentSnapshot, position) -> {
                         String docId = documentSnapshot.getId();
-                        updateRide(docId,preferenceManager.getString(Constants.KEY_USER_ID));
+                        updateRide(docId,preferenceManager.getString(Constants.KEY_USER_ID),
+                                preferenceManager.getString(Constants.KEY_NAME));
 
                     });
                 })
                 .setNegativeButton("Non", (dialog, id) -> {
-                    // if this button is clicked, just close
-                    // the dialog box and do nothing
                     dialog.cancel();
                 });
-
-        // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
-        // show it
         alertDialog.show();
     }
 
     // ASSIGNER RESERVATION
-    private void updateRide(String pathId, String driver) {
+    private void updateRide(String pathId, String driver,String driverName) {
 
         DocumentReference documentReference =
                 db.collection(Constants.KEY_COLLECTION_RESERVATIONS)
                         .document(pathId);
         documentReference.update(
                 Constants.KEY_ACCEPTED_BY,driver,
+                Constants.KEY_DRIVED_BY,driverName,
                 Constants.IS_ACCEPTED,true,
                 Constants.KEY_ACCEPTED_THE, new Date()
         );
@@ -130,4 +125,3 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
-// TODO faire card view pour afficher les reservations dispos

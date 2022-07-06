@@ -50,7 +50,7 @@ public class ReservationAcceptedAdapter extends FirestoreRecyclerAdapter<Reserva
             tvDropOff = itemView.findViewById(R.id.tvDropOff);
             tvHour = itemView.findViewById(R.id.tvHour);
             tvPrice = itemView.findViewById(R.id.tvPrice);
-            tvDateAccepted = itemView.findViewById(R.id.tvAcceptedDate);
+            //tvDateAccepted = itemView.findViewById(R.id.tvAcceptedDate);
         }
     }
 }

@@ -45,8 +45,8 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
     }
 
      public class ReservationHolder extends RecyclerView.ViewHolder {
-        TextView tvPickUp,tvDropOff,tvDate, tvHour,tvPrice,tvMessageAccepted;
-        Button okBtn;
+        TextView tvPickUp,tvDropOff,tvDate, tvHour,tvPrice;
+
 
 
         public ReservationHolder(View itemView) {
@@ -56,8 +56,6 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
             tvDate = itemView.findViewById(R.id.tvDate);
             tvHour = itemView.findViewById(R.id.tvHour);
             tvPrice = itemView.findViewById(R.id.tvPrice);
-            okBtn = itemView.findViewById(R.id.acceptRide);
-            tvMessageAccepted = itemView.findViewById(R.id.rideAccepted);
 
             itemView.setOnClickListener(view -> {
                 int position = getBindingAdapterPosition();

@@ -41,10 +41,10 @@ public class Constants {
     public static final String KEY_COLLECTION_ADMIN = "admin";
     public static final String KEY_IS_ADMIN = "isAdmin";
     public static final String KEY_IS_DRIVER = "isDriver";
-    public static final String KEY_ACCEPTED_BY = "accepted By";
-    public static final String KEY_COLLECTION_RIDE_ACCEPTED = "ride accepted";
+    public static final String KEY_ACCEPTED_BY = "acceptedBy";
     public static final String IS_ACCEPTED = "isAccepted";
     public static final String KEY_ACCEPTED_THE = "dayAccepted";
+    public static final String KEY_DRIVED_BY = "driver";
 
 
     public static HashMap<String,String> remoteMsgHeaders = null;
