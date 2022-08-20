@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference reservationRef = db.collection("reservations");
     private ReservationAdapter adapter;
+
+    private final String docId = null;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -84,37 +87,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void alertAcceptRide() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        PreferenceManager preferenceManager = new PreferenceManager(this);
-        // set title
-        alertDialogBuilder.setTitle("RESERVATION");
-        alertDialogBuilder.setIcon(R.drawable.ic_thumb_up);
+        adapter.setOnItemClickListener((documentSnapshot, position) -> {
+            AtomicReference<String> docId = new AtomicReference<>(documentSnapshot.getId());
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            PreferenceManager preferenceManager = new PreferenceManager(this);
+            // set title
+            alertDialogBuilder.setTitle("RÉSERVATION");
+            alertDialogBuilder.setIcon(R.drawable.ic_thumb_up);
 
-        // set dialog message
-        alertDialogBuilder
-                .setMessage("Accepter cette réservation ?")
-                .setCancelable(false)
-                .setPositiveButton("Oui !", (dialog, id) -> {
-                    adapter.setOnItemClickListener((documentSnapshot, position) -> {
-                        String docId = documentSnapshot.getId();
-                        updateRide(docId,preferenceManager.getString(Constants.KEY_USER_ID),
-                                preferenceManager.getString(Constants.KEY_NAME));
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage("Accepter cette réservation ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Oui !", (dialog, id) -> {
+                        {
+                            docId.set(documentSnapshot.getId());
+                            updateRide(docId, preferenceManager.getString(Constants.KEY_USER_ID),
+                                    preferenceManager.getString(Constants.KEY_NAME));
 
+                        }
+                    })
+                    .setNegativeButton("Non", (dialog, id) -> {
+                        dialog.cancel();
                     });
-                })
-                .setNegativeButton("Non", (dialog, id) -> {
-                    dialog.cancel();
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        });
     }
 
     // ASSIGNER RESERVATION
-    private void updateRide(String pathId, String driver,String driverName) {
+    private void updateRide(AtomicReference<String> pathId, String driver, String driverName) {
 
         DocumentReference documentReference =
                 db.collection(Constants.KEY_COLLECTION_RESERVATIONS)
-                        .document(pathId);
+                        .document(String.valueOf(pathId));
         documentReference.update(
                 Constants.KEY_ACCEPTED_BY,driver,
                 Constants.KEY_DRIVED_BY,driverName,

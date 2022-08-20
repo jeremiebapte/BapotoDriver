@@ -4,7 +4,11 @@ import androidx.annotation.Nullable;
 
 import com.google.firebase.Timestamp;
 
-public class Reservation {
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+public class Reservation implements Serializable {
 
 
     private String name;
@@ -16,7 +20,8 @@ public class Reservation {
     private String hour;
     private String date;
     private String price;
-    private Timestamp dayAccepted;
+    @Nullable
+    private Date dayAccepted;
     @Nullable
     private String infos;
     private User sender;
@@ -27,7 +32,7 @@ public class Reservation {
 
 
     public Reservation(String name, String telephone, @Nullable String email, String pickUp, String dropOff,
-                       String hour, String date, @Nullable String infos, Timestamp dayAccepted, String driver) {
+                       String hour, String date, @Nullable String infos, @Nullable Date dayAccepted, String driver) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
@@ -40,7 +45,7 @@ public class Reservation {
         this.driver = driver;
     }
 
-    public Reservation(String nom, String tel, String desti, String rdv, String date, String hour, String infos, String dayAccepted, User sender, String driver) {
+    public Reservation(String nom, String tel, String desti, String rdv, String date, String hour, String infos, Date dayAccepted, User sender, String driver) {
     }
 
     public String getName() {
@@ -133,11 +138,13 @@ public class Reservation {
         this.infos = infos;
     }
 
-    public Timestamp getDayAccepted() {
+
+    @Nullable
+    public Date getDayAccepted() {
         return dayAccepted;
     }
 
-    public void setDayAccepted(Timestamp dayAccepted) {
+    public void setDayAccepted(@Nullable Date dayAccepted) {
         this.dayAccepted = dayAccepted;
     }
 }

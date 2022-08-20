@@ -36,6 +36,7 @@ public class SendReservationActivity extends AppCompatActivity {
         HashMap<String, Object> reservation = new HashMap<>();
         reservation.put(Constants.KEY_NAME,binding.inputName.getText().toString());
         reservation.put(Constants.KEY_DATE,binding.inputDate.getText().toString());
+        reservation.put(Constants.KEY_ACCEPTED_THE,null);
         reservation.put(Constants.KEY_HOUR,binding.inputHour.getText().toString());
         reservation.put(Constants.KEY_PICK_UP,binding.inputPickUp.getText().toString());
         reservation.put(Constants.IS_ACCEPTED,false);

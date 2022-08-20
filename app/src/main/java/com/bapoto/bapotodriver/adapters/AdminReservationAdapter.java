@@ -10,29 +10,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bapoto.bapotodriver.R;
 import com.bapoto.bapotodriver.models.Reservation;
-import com.bapoto.bapotodriver.models.User;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.Timestamp;
+
+import java.util.Date;
+import java.util.Locale;
 
 public class AdminReservationAdapter extends FirestoreRecyclerAdapter<Reservation,AdminReservationAdapter.AdminReservationHolder> {
-
-
 
     public AdminReservationAdapter(@NonNull FirestoreRecyclerOptions<Reservation> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull AdminReservationHolder holder, int position, @NonNull Reservation model) {
-        User user = new User();
+    protected void onBindViewHolder(@NonNull AdminReservationHolder holder, int position,
+                                    @NonNull Reservation model) {
+
         holder.tvPickUp.setText(model.getPickUp());
-                holder.tvDropOff.setText(model.getDropOff());
-                holder.tvDate.setText(model.getDate());
-                holder.tvHour.setText(model.getHour());
-                holder.tvPrice.setText(model.getPrice());
-                holder.tvdriver.setText((CharSequence) model.getDriver());
-                holder.tvDateAccepted.setText(model.getDayAccepted().toDate().toString());
+        holder.tvDropOff.setText(model.getDropOff());
+        holder.tvDate.setText(model.getDate());
+        holder.tvHour.setText(model.getHour());
+        holder.tvPrice.setText(model.getPrice());
+        holder.tvdriver.setText(model.getDriver());
+        if (model.getDayAccepted() != null) {
+            holder.tvDateAccepted.setText(model.getDayAccepted().toString());
+        }
+
     }
+
 
     @NonNull
     @Override
@@ -48,7 +54,6 @@ public class AdminReservationAdapter extends FirestoreRecyclerAdapter<Reservatio
 
     public static class AdminReservationHolder extends RecyclerView.ViewHolder {
         TextView tvPickUp,tvDropOff,tvDate, tvHour,tvPrice ,tvdriver,tvDateAccepted;
-
 
         public AdminReservationHolder(@NonNull View itemView) {
             super(itemView);
