@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.bapoto.bapotodriver.databinding.ActivitySendReservationBinding;
 import com.bapoto.bapotodriver.utilities.Constants;
 import com.bapoto.bapotodriver.utilities.PreferenceManager;
@@ -17,13 +16,13 @@ public class SendReservationActivity extends AppCompatActivity {
 
     private ActivitySendReservationBinding binding;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySendReservationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListeners();
+
     }
 
     private void setListeners() {
@@ -36,13 +35,16 @@ public class SendReservationActivity extends AppCompatActivity {
         HashMap<String, Object> reservation = new HashMap<>();
         reservation.put(Constants.KEY_NAME,binding.inputName.getText().toString());
         reservation.put(Constants.KEY_DATE,binding.inputDate.getText().toString());
-        reservation.put(Constants.KEY_ACCEPTED_THE,null);
         reservation.put(Constants.KEY_HOUR,binding.inputHour.getText().toString());
         reservation.put(Constants.KEY_PICK_UP,binding.inputPickUp.getText().toString());
-        reservation.put(Constants.IS_ACCEPTED,false);
         reservation.put(Constants.KEY_DROP_OFF,binding.inputDropOff.getText().toString());
-        reservation.put(Constants.KEY_INFOS,binding.inputInfos.getText().toString());
         reservation.put(Constants.KEY_PRICE,binding.inputPrice.getText().toString());
+        reservation.put(Constants.KEY_ACCEPTED_THE,null);
+        reservation.put(Constants.KEY_FINISHED_THE,binding.inputFinishDate.getText().toString());
+        reservation.put(Constants.IS_ACCEPTED,false);
+        reservation.put(Constants.KEY_IS_DONE,false);
+        reservation.put(Constants.KEY_INFOS,binding.inputInfos.getText().toString());
+
         database.collection(Constants.KEY_COLLECTION_RESERVATIONS)
                 .add(reservation)
                 .addOnSuccessListener(documentReference -> {
@@ -54,6 +56,10 @@ public class SendReservationActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(Throwable::getMessage);
 
-    }
 
+    }
 }
+
+
+
+

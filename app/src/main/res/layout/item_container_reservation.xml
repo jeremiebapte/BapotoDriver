@@ -125,7 +125,7 @@
         android:textSize="@dimen/_12ssp"/>
 
     <TextView
-        android:id="@+id/tvDate"
+        android:id="@+id/tvDateRide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -217,7 +217,7 @@
 
                 android:fontFamily="@font/ubuntu_medium"
                 android:includeFontPadding="false"
-                android:text="Cliquez pour accepter "
+                android:text="Double Clic pour accepter "
                 android:textColor="@color/colorTextSubtitle"
                 android:textSize="@dimen/_8ssp" />
 

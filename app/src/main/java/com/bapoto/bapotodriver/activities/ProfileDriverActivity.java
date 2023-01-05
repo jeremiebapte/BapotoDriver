@@ -1,5 +1,8 @@
 package com.bapoto.bapotodriver.activities;
 
+
+import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,18 +10,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bapoto.bapotodriver.R;
 import com.bapoto.bapotodriver.activities.admin.AdminsActivity;
+import com.bapoto.bapotodriver.adapters.DriverAccountAdapter;
 import com.bapoto.bapotodriver.adapters.RecentConversationAdapter;
 import com.bapoto.bapotodriver.adapters.ReservationAcceptedAdapter;
-import com.bapoto.bapotodriver.adapters.ReservationAdapter;
 import com.bapoto.bapotodriver.databinding.ActivityProfileDriverBinding;
 import com.bapoto.bapotodriver.listeners.ConversionListener;
 import com.bapoto.bapotodriver.models.ChatMessage;
@@ -27,6 +33,8 @@ import com.bapoto.bapotodriver.models.User;
 import com.bapoto.bapotodriver.utilities.Constants;
 import com.bapoto.bapotodriver.utilities.PreferenceManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -35,12 +43,18 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.security.Key;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ProfileDriverActivity extends BaseActivity implements ConversionListener {
 
@@ -48,24 +62,40 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
     private PreferenceManager preferenceManager;
     private List<ChatMessage> conversations;
     private ReservationAcceptedAdapter adapter;
+    private DriverAccountAdapter driverAccountAdapter;
     private RecentConversationAdapter conversationAdapter;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference reservationRef = db.collection(Constants.KEY_COLLECTION_RESERVATIONS);
-    private FirebaseFirestore database;
+    private final CollectionReference userRef = db.collection(Constants.KEY_COLLECTION_USERS);
+    private NotificationManagerCompat notificationManager;
 
+    private FirebaseFirestore database;
+    private ReservationAcceptedAdapter reservationAcceptedAdapter;
+    @SuppressLint("StaticFieldLeak")
+    public static Button btnAbortRide, btnFinishRide;
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileDriverBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(this);
+        notificationManager = NotificationManagerCompat.from(this);
+
+        btnAbortRide = findViewById(R.id.abortRideButton);
+        btnFinishRide = findViewById(R.id.finishRideButton);
         init();
         loadUserDetails();
         getToken();
         listenConversation();
         setListeners();
         setupRecyclerView();
+        setupSndRecyclerView();
     }
+
+
 
     private void init() {
         conversations = new ArrayList<>();
@@ -98,7 +128,11 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
     }
 
     private void loadUserDetails(){
+
+
         binding.textName.setText(preferenceManager.getString(Constants.KEY_NAME));
+
+
         byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE),Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
         binding.imageProfile.setImageBitmap(bitmap);
@@ -152,9 +186,11 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
         alertDialog.show();
     }
 
-    // RESERVATIONS ACCEPTEES
+    //////////////////////// RECYCLER VIEW - RESERVATIONS ACCEPTEES////////////////////////////
     private void setupRecyclerView() {
-        Query query = reservationRef.whereEqualTo(Constants.KEY_ACCEPTED_BY, preferenceManager.getString(Constants.KEY_USER_ID));
+        Query query = reservationRef.whereEqualTo(Constants.KEY_ACCEPTED_BY,
+                preferenceManager.getString(Constants.KEY_USER_ID))
+                                    .whereEqualTo(Constants.KEY_IS_DONE,false);
 
         FirestoreRecyclerOptions<Reservation> options = new FirestoreRecyclerOptions.Builder<Reservation>()
                 .setQuery(query, Reservation.class)
@@ -162,26 +198,150 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
 
         adapter = new ReservationAcceptedAdapter(options);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = findViewById(R.id.rideAcceptedRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnButtonAbortClickListener((documentSnapshot, position)   -> alertAbortRide());
+
+        adapter.setOnButtonFinishClickListener((documentSnapshot, position) -> alertFinishRide() );
+
     }
 
-    @Override
+    private void setupSndRecyclerView() {
+        Query query = userRef.whereEqualTo(Constants.KEY_USER_ID,
+                preferenceManager.getString(Constants.KEY_USER_ID));
+
+        FirestoreRecyclerOptions<User> options = new FirestoreRecyclerOptions.Builder<User>()
+                .setQuery(query,User.class)
+                .build();
+
+        driverAccountAdapter = new DriverAccountAdapter(options);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.HORIZONTAL,false);
+        RecyclerView recyclerView = findViewById(R.id.accountRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(driverAccountAdapter);
+
+
+
+    }
+
+    private void alertFinishRide() {
+        adapter.setOnButtonFinishClickListener(((documentSnapshot, position) -> {
+            AtomicReference<String> docId = new AtomicReference<>(documentSnapshot.getId());
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            // set title
+            alertDialogBuilder.setTitle("COURSE TERMINEE ?");
+            alertDialogBuilder.setIcon(R.drawable.ic_thumb_up);
+
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage("Vous avez terminé cette course ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Oui !", (dialog, id) -> {
+                        {
+                            docId.set(documentSnapshot.getId());
+                            try {
+                                finishRide(docId);
+                                addRideToAccount(docId);
+                                animationAndGoBackToMain();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    })
+                    .setNegativeButton("Non", (dialog, id) -> dialog.cancel());
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }));
+    }
+
+    private void finishRide(AtomicReference<String> docId) throws ParseException {
+
+        DocumentReference documentReference =
+                db.collection(Constants.KEY_COLLECTION_RESERVATIONS)
+                        .document(String.valueOf(docId));
+
+
+            documentReference.update(Constants.KEY_IS_DONE,true);
+            documentReference.update(Constants.KEY_FINISHED_THE,new Date());
+        }
+
+        private void addRideToAccount(AtomicReference<String> docId) {
+
+
+        DocumentReference documentReference =
+                db.collection(Constants.KEY_COLLECTION_USERS)
+                .document(String.valueOf(docId));
+
+        documentReference.update("numberOfRide", FieldValue.increment(1));
+
+        }
+
+        private void alertAbortRide() {
+        adapter.setOnButtonAbortClickListener(((documentSnapshot, position) -> {
+        AtomicReference<String> docId = new AtomicReference<>(documentSnapshot.getId());
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            // set title
+        alertDialogBuilder.setTitle("ANNULATION RÉSERVATION");
+        alertDialogBuilder.setIcon(R.drawable.ic_sad);
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Etes vous sur de ne plus vouloir faire cette course ?")
+                .setCancelable(false)
+                .setPositiveButton("Oui !", (dialog, id) -> {
+                    {
+                        docId.set(documentSnapshot.getId());
+                        abortRide(docId);
+
+                    }
+                })
+                .setNegativeButton("Non", (dialog, id) -> dialog.cancel());
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }));
+
+    }
+
+    private void abortRide(AtomicReference<String> docId) {
+
+        DocumentReference documentReference =
+                db.collection(Constants.KEY_COLLECTION_RESERVATIONS)
+                        .document(String.valueOf(docId));
+        documentReference.update(Constants.IS_ACCEPTED,false,
+                Constants.KEY_ACCEPTED_BY,null
+        );
+    }
+
+    private void animationAndGoBackToMain() {
+        Intent intent = new Intent(ProfileDriverActivity.this, SuccessRideFinish.class);
+        startActivity(intent);
+        finish();
+    }
+
+ @Override
     protected void onStart() {
         super.onStart();
         adapter.startListening();
+        driverAccountAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
+        driverAccountAdapter.stopListening();
     }
 
-    // CHAT
+    ////////////////////// CHAT //////////////////////////
     private void listenConversation() {
         database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
                 .whereEqualTo(Constants.KEY_SENDER_ID,preferenceManager.getString(Constants.KEY_USER_ID))

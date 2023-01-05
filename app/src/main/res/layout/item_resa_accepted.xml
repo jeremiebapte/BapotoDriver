@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutResaAccepted"
     android:orientation="vertical"
     android:background="@drawable/border"
     android:layout_marginTop="@dimen/_12sdp"
     android:layout_marginStart="@dimen/_12sdp"
     android:layout_marginEnd="@dimen/_12sdp"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/backgroun_resa_accepted"
+        android:layout_height="51dp"
         android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/backgroun_resa_accepted"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -21,7 +22,7 @@
             android:id="@+id/textTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_4sdp"
             android:layout_marginBottom="@dimen/_2sdp"
             android:fontFamily="@font/ubuntu_regular"
@@ -32,7 +33,7 @@
             android:textSize="@dimen/_16ssp" />
 
         <TextView
-            android:id="@+id/tvDate"
+            android:id="@+id/tvDateRideAccepted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_8sdp"
@@ -44,23 +45,15 @@
 
     </LinearLayout>
 
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvlittleDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_marginBottom="@dimen/_4sdp"
-            android:fontFamily="@font/ubuntu_regular"
-            android:text="19/3/22"
-            android:textColor="@color/colorTextSubtitle"
-            android:textSize="@dimen/_12ssp" />
 
         <TextView
             android:id="@+id/tvHour"
@@ -68,37 +61,19 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_4sdp"
             android:text="18H"
-            android:textColor="@color/colorTextSubtitle"
+            android:textColor="@color/colorNoteColor5"
             android:textSize="@dimen/_12ssp" />
 
 
-
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:text="50"
-            android:textColor="@color/colorNoteColor5"
-            android:textSize="@dimen/_14ssp"/>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:orientation="horizontal">
 
@@ -110,13 +85,14 @@
             android:layout_marginTop="@dimen/_4sdp"
             android:fontFamily="@font/ubuntu_regular"
             android:text="Gryffondor"
-            android:textColor="@color/colorTextSubtitle"
+            android:textColor="@color/colorNoteColor5"
             android:textSize="@dimen/_12ssp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp">
 
     <TextView
         android:id="@+id/tvDropOff"
@@ -127,8 +103,69 @@
         android:layout_marginBottom="@dimen/_5sdp"
         android:text="Winterfell"
         android:fontFamily="@font/ubuntu_regular"
-        android:textColor="@color/colorTextSubtitle"
+        android:textColor="@color/colorNoteColor5"
         android:textSize="@dimen/_12ssp"/>
 
 </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_150sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="50"
+            android:textStyle="bold"
+            android:textColor="@color/error"
+            android:textSize="@dimen/_14ssp"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="326dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/abortRideButton"
+            android:layout_width="113dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_60sdp"
+            android:text="Annuler"
+            android:onClick="sendAbortNotif"
+            android:textSize="@dimen/_10sdp"
+            tools:ignore="UsingOnClickInXml">
+
+        </Button>
+
+        <Button
+            android:id="@+id/finishRideButton"
+            android:onClick="sendFinishNotif"
+            android:layout_width="116dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_60sdp"
+            android:text="Terminer"
+            android:textSize="@dimen/_10sdp"
+            tools:ignore="UsingOnClickInXml">
+
+        </Button>
+
+
+    </LinearLayout>
+
 </LinearLayout>

@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BapotoDriver">
         <activity
+            android:name=".activities.SuccessRideFinish"
+            android:exported="false" />
+        <activity
+            android:name=".activities.admin.AllRideAdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.admin.AdminsActivity"
             android:exported="false" />
         <activity
@@ -67,9 +73,15 @@
             android:name=".activities.ProfileDriverActivity"
             android:exported="true"
             android:parentActivityName=".activities.MainActivity" />
-
         <service
             android:name=".firebase.MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".firebase.NotificationService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

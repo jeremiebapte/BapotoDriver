@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bapoto.bapotodriver.activities.admin.PasswordAdminActivity;
@@ -21,6 +22,7 @@ import com.bapoto.bapotodriver.databinding.ActivitySignUpBinding;
 import com.bapoto.bapotodriver.utilities.Constants;
 import com.bapoto.bapotodriver.utilities.PreferenceManager;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -54,13 +56,13 @@ public class SignUpActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             pickImage.launch(intent);
         });
-        binding.textAddAdmin.setOnClickListener(view -> {
+        binding.adminbutton.setOnClickListener(view -> {
             Intent intent = new Intent(this, PasswordAdminActivity.class);
             startActivity(intent);
         });
     }
 
-    private void showToast(String message) {
+    public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -71,6 +73,8 @@ public class SignUpActivity extends AppCompatActivity {
         user.put(Constants.KEY_NAME, binding.inputName.getText().toString());
         user.put(Constants.KEY_EMAIL,binding.inputEmail.getText().toString());
         user.put(Constants.KEY_PASSWORD,binding.inputPassword.getText().toString());
+        user.put(Constants.KEY_ACCOUNT,0);
+        user.put(Constants.NUMBER_RIDE,0);
         user.put(Constants.KEY_IMAGE,encodedImage);
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .add(user)
@@ -80,8 +84,14 @@ public class SignUpActivity extends AppCompatActivity {
                 preferenceManager.putBoolean(Constants.KEY_IS_DRIVER,true);
                 preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
                 preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString());
+                preferenceManager.putString(Constants.KEY_ACCOUNT,"");
+                preferenceManager.putString(Constants.NUMBER_RIDE,"");
                 preferenceManager.putString(Constants.KEY_IMAGE,encodedImage);
                 Intent intent = new Intent(this, MainActivity.class);
+                HashMap<String,Object> putId = new HashMap<>();
+                putId.put(Constants.KEY_USER_ID,documentReference.getId());
+                database.collection(Constants.KEY_COLLECTION_USERS).document(documentReference.getId())
+                        .set(putId, SetOptions.merge());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 })

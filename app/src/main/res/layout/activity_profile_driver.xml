@@ -89,35 +89,17 @@
             android:overScrollMode="never"
             android:padding="@dimen/_20sdp" />
 
-        <LinearLayout
-            android:id="@+id/layoutAccount"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_120sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:background="@drawable/background_search"
-            android:gravity="center_vertical"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/accountRecyclerView"
+            android:layout_width="203dp"
+            android:layout_height="94dp"
+            android:layout_marginStart="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:clipToPadding="false"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp">
-
-
-            <TextView
-                android:id="@+id/tvAccount"
-                android:layout_width="@dimen/_55sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_gravity="center"
-                android:background="@null"
-                android:fontFamily="@font/ubuntu_regular"
-                android:text="0 € "
-                android:gravity="center"
-                android:importantForAutofill="no"
-                android:includeFontPadding="false"
-                android:textColor="@color/white"
-                android:textColorHint="@color/colorTextHint"
-                android:textSize="@dimen/_18ssp"/>
-        </LinearLayout>
+            android:overScrollMode="never"
+            android:padding="@dimen/_20sdp" />
 
         <TextView
             android:id="@+id/tvPastReservations"
@@ -150,7 +132,7 @@
         android:layout_marginEnd="@dimen/_24sdp"
         android:layout_marginBottom="@dimen/_24sdp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_bubble_chat"
         app:rippleColor="@color/white"
         android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -167,7 +149,7 @@
         android:layout_marginRight="@dimen/_24sdp"
         android:layout_marginBottom="@dimen/_24sdp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_car"
+        android:src="@drawable/ic_list"
         android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

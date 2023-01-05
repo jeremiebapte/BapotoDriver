@@ -1,15 +1,22 @@
 package com.bapoto.bapotodriver.models;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.Nullable;
 
 import com.google.firebase.Timestamp;
+import com.google.type.DateTime;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Reservation implements Serializable {
 
+    String isoHourPattern = "HH:mm";
+    @SuppressLint("SimpleDateFormat")
+    SimpleDateFormat simpleHourFormat = new SimpleDateFormat(isoHourPattern);
 
     private String name;
     private String telephone;
@@ -18,21 +25,31 @@ public class Reservation implements Serializable {
     private String pickUp;
     private String dropOff;
     private String hour;
-    private String date;
-    private String price;
+    // TODO REGLER SOUCI AVEC DATE POUR POUVOIR COMPARER LES DATES 
+
     @Nullable
-    private Date dayAccepted;
+    private String price;
+    private Timestamp dayAccepted;
+    private String dayShouldFinish;
+    @Nullable
+    private String date;
     @Nullable
     private String infos;
     private User sender;
     private String driver;
+    private String driverId;
+    public Boolean isDone;
+    private long timestamp;
 
     public Reservation() {
     }
 
 
-    public Reservation(String name, String telephone, @Nullable String email, String pickUp, String dropOff,
-                       String hour, String date, @Nullable String infos, @Nullable Date dayAccepted, String driver) {
+
+
+    public Reservation(String name, String telephone,long timestamp, @Nullable String email,@Nullable String date, String pickUp, String dropOff,
+                       String hour, @Nullable String infos, Timestamp dayAccepted,
+                       String dayShouldFinish, String driver, Boolean isDone, String driverId) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
@@ -43,9 +60,13 @@ public class Reservation implements Serializable {
         this.infos = infos;
         this.dayAccepted = dayAccepted;
         this.driver = driver;
+        this.isDone = isDone;
+        this.dayShouldFinish = dayShouldFinish;
+        this.timestamp = timestamp;
+        this.driverId = driverId;
     }
 
-    public Reservation(String nom, String tel, String desti, String rdv, String date, String hour, String infos, Date dayAccepted, User sender, String driver) {
+    public Reservation(String nom, String tel, String desti, Integer price, String rdv, Date date, String hour,Boolean isDone, String infos, String dayAccepted, User sender, String driver) {
     }
 
     public String getName() {
@@ -113,19 +134,21 @@ public class Reservation implements Serializable {
         this.hour = hour;
     }
 
+    @Nullable
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(@Nullable String date) {
         this.date = date;
     }
 
+    @Nullable
     public String getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(@Nullable String price) {
         this.price = price;
     }
 
@@ -138,13 +161,44 @@ public class Reservation implements Serializable {
         this.infos = infos;
     }
 
+    public String getDriverId() {
+        return driverId;
+    }
 
-    @Nullable
-    public Date getDayAccepted() {
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
+
+    public Timestamp getDayAccepted() {
         return dayAccepted;
     }
 
-    public void setDayAccepted(@Nullable Date dayAccepted) {
+    public void setDayAccepted(@Nullable Timestamp dayAccepted) {
         this.dayAccepted = dayAccepted;
+    }
+
+
+    public String getDayShouldFinish() {
+        return dayShouldFinish;
+    }
+
+    public void setDayShouldFinish(String dayShouldFinish) {
+        this.dayShouldFinish = dayShouldFinish;
+    }
+
+    public Boolean getDone() {
+        return isDone;
+    }
+
+    public void setDone(Boolean done) {
+        isDone = done;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

@@ -52,42 +52,46 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reservationRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="371dp"
-            android:layout_marginStart="@dimen/_2sdp"
-            android:layout_marginEnd="@dimen/_2sdp"
+            android:layout_width="@dimen/_300sdp"
+            android:layout_height="@dimen/_480sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:clipToPadding="false"
-            android:paddingStart="0dp"
+            android:paddingStart="@dimen/_2sdp"
             android:paddingEnd="@dimen/_12sdp"
-            android:paddingBottom="@dimen/_12sdp"
-            app:layout_constraintBottom_toTopOf="@id/layoutQuickActions"
-            app:layout_constraintTop_toBottomOf="@id/textReservation" />
+            android:paddingBottom="@dimen/_12sdp" />
+
+        <TextView
+            android:id="@+id/textNoRideMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:gravity="center"
+            android:textColor="@color/error"
+            android:textSize="@dimen/_12ssp"
+            android:visibility="gone"/>
 
     </FrameLayout>
 
 
-    <LinearLayout
-        android:id="@+id/layoutQuickActions"
-        android:layout_width="match_parent"
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabGoToProfile"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorTextSubtitle"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="@dimen/_15sdp"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <ImageView
-            android:id="@+id/imageOpenChat"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_account_circle"
-            app:tint="@color/colorIcons" />
-
-
-
-    </LinearLayout>
-
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginRight="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_user_profile"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:tint="@color/white"/>
 
 
 

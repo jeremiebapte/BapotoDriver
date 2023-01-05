@@ -27,8 +27,19 @@ public class PreferenceManager {
         editor.apply();
     }
 
+
     public String getString(String key) {
         return sharedPreferences.getString(key,null);
+    }
+
+    public void putInt(String key, int value) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(key, value);
+        editor.apply();
+    }
+
+    public int getInt(int key) {
+        return sharedPreferences.getInt(null, key);
     }
 
     public void clear() {
@@ -36,6 +47,7 @@ public class PreferenceManager {
         editor.clear();
         editor.apply();
     }
+
 
 
 }

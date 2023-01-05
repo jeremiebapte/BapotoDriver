@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".activities.admin.MainReservationActivity">
-    
+    tools:context=".activities.admin.AllRideAdminActivity">
+
     <TextView
-        android:id="@+id/textReservation"
+        android:id="@+id/textAllReservation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"
@@ -16,7 +15,7 @@
         android:layout_marginEnd="@dimen/_12sdp"
         android:fontFamily="@font/ubuntu_bold"
         android:includeFontPadding="false"
-         android:text="@string/r_servations"
+        android:text="@string/r_servation_termin_es"
         android:textColor="@color/primary"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -33,16 +32,15 @@
         android:orientation="horizontal"
         android:paddingStart="@dimen/_10sdp"
         android:paddingEnd="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/textReservation">
+        app:layout_constraintTop_toBottomOf="@id/textAllReservation">
 
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_search"
-            app:tint="@color/white" />
-        
-        
+    <ImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_search"
+        app:tint="@color/white" />
+
         <EditText
             android:id="@+id/inputSearch"
             android:layout_width="match_parent"
@@ -59,21 +57,20 @@
             android:textColorHint="@color/colorTextHint"
             android:textSize="@dimen/_13ssp"/>
 
-     </LinearLayout>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/AdminreservationRecyclerView"
+        android:id="@+id/AdminAllreservationRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_2sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
         android:clipToPadding="false"
         android:paddingStart="0dp"
         android:paddingEnd="@dimen/_12sdp"
         android:paddingBottom="@dimen/_12sdp"
-        app:layout_constraintBottom_toTopOf="@id/layoutQuickActions"
-        app:layout_constraintTop_toBottomOf="@id/layoutSearch"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutSearch"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp" />
 
     <LinearLayout
         android:id="@+id/layoutQuickActions"
@@ -104,21 +101,6 @@
 
 
     </LinearLayout>
-    
-    
-    <ImageView
-        android:id="@+id/addReservationMain"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
-        android:background="@drawable/background_add_button"
-        android:contentDescription="@string/app_name"
-        android:padding="@dimen/_5sdp"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toTopOf="@id/layoutQuickActions"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/primary"
-        app:layout_constraintTop_toTopOf="@id/layoutQuickActions" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

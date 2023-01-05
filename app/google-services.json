@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:728877655234:android:b3f5db460e01c8e76a875b",
+        "mobilesdk_app_id": "1:728877655234:android:0e5093cfa593c8f26a875b",
         "android_client_info": {
           "package_name": "com.bapoto.bapotodriver"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "728877655234-lmd998qkfdeasofpni8gufvnaon248j8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bapoto.bapotodriver",
+            "certificate_hash": "3b180cc7e1e20a9a59b393c0595f081247609a43"
+          }
+        },
         {
           "client_id": "728877655234-uis76sggpm07keoj0fv9ho21o6b170vh.apps.googleusercontent.com",
           "client_type": 3

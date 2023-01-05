@@ -8,7 +8,7 @@
     <string name="sign_in">CONNEXION</string>
     <string name="add_image">Ajouter photo</string>
     <string name="name">Nom</string>
-    <string name="conrfirm_password">Conrfirmation mot de passe</string>
+    <string name="conrfirm_password">Confirmation mot de passe</string>
     <string name="sign_up">Créer un compte</string>
     <string name="select_user">Choisir un utilisateur</string>
     <string name="on_line">En ligne</string>
@@ -31,4 +31,9 @@
     <string name="select_admin">Choisir un admin</string>
     <string name="choose_a_driver">Choisir un Chauffeur</string>
     <string name="choose_a_admin">Choisir un admin</string>
+    <string name="date_fin_de_course">Date fin de course</string>
+    <string name="r_servation_termin_es">Réservation Terminées</string>
+    <string name="notification_channel_id">my canal</string>
+    <string name="notification_channel_title">my titile</string>
+    <string name="notification_channel_descrption">canal de test</string>
 </resources>

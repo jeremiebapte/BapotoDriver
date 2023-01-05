@@ -1,11 +1,14 @@
 package com.bapoto.bapotodriver.adapters;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bapoto.bapotodriver.R;
@@ -13,16 +16,22 @@ import com.bapoto.bapotodriver.models.Reservation;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Locale;
 
 public class AdminReservationAdapter extends FirestoreRecyclerAdapter<Reservation,AdminReservationAdapter.AdminReservationHolder> {
+ private OnItemClickListener listener;
+
 
     public AdminReservationAdapter(@NonNull FirestoreRecyclerOptions<Reservation> options) {
         super(options);
-    }
+     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onBindViewHolder(@NonNull AdminReservationHolder holder, int position,
                                     @NonNull Reservation model) {
@@ -33,12 +42,23 @@ public class AdminReservationAdapter extends FirestoreRecyclerAdapter<Reservatio
         holder.tvHour.setText(model.getHour());
         holder.tvPrice.setText(model.getPrice());
         holder.tvdriver.setText(model.getDriver());
+
         if (model.getDayAccepted() != null) {
-            holder.tvDateAccepted.setText(model.getDayAccepted().toString());
+            Timestamp dt = model.getDayAccepted();
+            int seconds = (int) dt.getSeconds();
+            Date date = new Date(seconds * 1000L);
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE d MMMM yyyy à HH:mm");
+            String resaTime = sdf.format(date);
+            holder.tvDateAccepted.setText(resaTime);
+
+        } else {
+            holder.tvDateAccepted.setText("");
         }
 
-    }
 
+
+        }
 
     @NonNull
     @Override
@@ -50,9 +70,12 @@ public class AdminReservationAdapter extends FirestoreRecyclerAdapter<Reservatio
 
     public void deleteItem(int position) {
         getSnapshots().getSnapshot(position).getReference().delete();
+
     }
 
-    public static class AdminReservationHolder extends RecyclerView.ViewHolder {
+
+
+    public class AdminReservationHolder extends RecyclerView.ViewHolder {
         TextView tvPickUp,tvDropOff,tvDate, tvHour,tvPrice ,tvdriver,tvDateAccepted;
 
         public AdminReservationHolder(@NonNull View itemView) {
@@ -65,10 +88,25 @@ public class AdminReservationAdapter extends FirestoreRecyclerAdapter<Reservatio
             tvdriver = itemView.findViewById(R.id.tvDriver);
             tvDateAccepted= itemView.findViewById(R.id.tvDateAccepted);
 
+
+            itemView.setOnClickListener(view -> {
+                int position  = getAbsoluteAdapterPosition();
+                if (position != RecyclerView.NO_POSITION && listener != null) {
+                    listener.onItemClick(getSnapshots().getSnapshot(position), position );
+                }
+
+
+            });
+
         }
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
 
-
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
 }

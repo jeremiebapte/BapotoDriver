@@ -92,7 +92,6 @@
 
 
 
-
     </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -102,10 +101,24 @@
         android:layout_marginEnd="@dimen/_24sdp"
         android:layout_marginBottom="@dimen/_24sdp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_add"
-        android:backgroundTint="@color/primary"
+        android:src="@drawable/ic_chat"
+        android:backgroundTint="@color/colorNoteColor4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:tint="@color/white"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabResetAccounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_reset"
+        android:backgroundTint="@color/colorNoteColor4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fabGoAllresa"
         android:tint="@color/white"/>
 
 
@@ -119,7 +132,7 @@
         android:layout_marginBottom="@dimen/_24sdp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_car"
-        android:backgroundTint="@color/primary"
+        android:backgroundTint="@color/colorNoteColor4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:tint="@color/white"/>

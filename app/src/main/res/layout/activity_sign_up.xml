@@ -149,16 +149,17 @@
         android:textSize="@dimen/_13ssp"
         android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/textAddAdmin"
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="admin"
-        android:textColor="@color/secondary_text"
-        android:textSize="@dimen/_10ssp"
+        android:background="@color/white"
+        android:id="@+id/adminbutton"
+        android:src="@drawable/equipement"
         android:layout_marginTop="@dimen/_80sdp"
-        android:layout_marginStart="@dimen/_100sdp"/>
+        android:layout_marginStart="@dimen/_115sdp"
+
+        />
+
 
 
 
@@ -166,5 +167,7 @@
 
 
 </LinearLayout>
+
+
 
 </ScrollView>
