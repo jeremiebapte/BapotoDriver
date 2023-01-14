@@ -6,20 +6,36 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".activities.admin.MainReservationActivity">
-    
+
     <TextView
         android:id="@+id/textReservation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_width="346dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu_bold"
         android:includeFontPadding="false"
-         android:text="@string/r_servations"
+        android:text="@string/r_servations"
         android:textColor="@color/primary"
         android:textSize="@dimen/_20ssp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageBack"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/background_icon"
+        android:padding="@dimen/_6sdp"
+        android:src="@drawable/ic_back"
+        android:tint="@color/primary"
+        app:layout_constraintEnd_toStartOf="@id/textReservation"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/layoutSearch"
@@ -71,54 +87,56 @@
         android:paddingStart="0dp"
         android:paddingEnd="@dimen/_12sdp"
         android:paddingBottom="@dimen/_12sdp"
-        app:layout_constraintBottom_toTopOf="@id/layoutQuickActions"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutSearch"/>
 
 
-    <LinearLayout
-        android:id="@+id/layoutQuickActions"
-        android:layout_width="match_parent"
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabNewChat"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorQuickActionBackGround"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="@dimen/_15sdp"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <ImageView
-            android:id="@+id/imageOpenChat"
-            android:layout_width="@dimen/_23sdp"
-            android:layout_height="@dimen/_23sdp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_chat"
-            app:tint="@color/colorIcons" />
-
-        <ImageView
-            android:id="@+id/imageOpenAllRide"
-            android:layout_width="@dimen/_23sdp"
-            android:layout_height="@dimen/_23sdp"
-            android:layout_marginStart="@dimen/_60sdp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_checklist"
-            app:tint="@color/colorIcons" />
-
-
-    </LinearLayout>
-    
-    
-    <ImageView
-        android:id="@+id/addReservationMain"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
-        android:background="@drawable/background_add_button"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
         android:contentDescription="@string/app_name"
-        android:padding="@dimen/_5sdp"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toTopOf="@id/layoutQuickActions"
+        android:src="@drawable/ic_chat"
+        android:backgroundTint="@color/colorNoteColor4"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/primary"
-        app:layout_constraintTop_toTopOf="@id/layoutQuickActions" />
+        android:tint="@color/white"/>
 
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAllRideFinished"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_70sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_result"
+        android:backgroundTint="@color/colorNoteColor4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fabAddNewResa"
+        android:tint="@color/white"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddNewResa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginRight="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/colorNoteColor4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:tint="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

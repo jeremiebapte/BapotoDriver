@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/primary"
+android:fillViewport="true"
+tools:ignore="SpeakableTextPresentCheck">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="@color/primary"
+    android:layout_height="wrap_content"
     tools:context=".activities.ProfileDriverActivity">
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -13,7 +19,6 @@
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginLeft="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_12sdp"
         android:background="@drawable/background_icon"
         android:scaleType="centerCrop"
@@ -26,8 +31,7 @@
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginRight="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
         android:background="@drawable/background_icon"
         android:padding="@dimen/_6sdp"
         android:src="@drawable/ic_logout"
@@ -35,10 +39,23 @@
         app:layout_constraintTop_toTopOf="parent"
         android:tint="@color/colorNoteColor3"/>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageDeleteAccount"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:background="@color/primary"
+        android:padding="@dimen/_6sdp"
+        android:src="@drawable/ic_more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:tint="@color/white"/>
+
     <TextView
         android:id="@+id/textName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="255dp"
+        android:layout_height="25dp"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:ellipsize="end"
@@ -50,27 +67,38 @@
         app:layout_constraintBottom_toBottomOf="@id/imageProfile"
         app:layout_constraintEnd_toStartOf="@id/imageSignOut"
         app:layout_constraintStart_toEndOf="@id/imageProfile"
-        app:layout_constraintTop_toTopOf="@id/imageProfile"/>
+        app:layout_constraintTop_toTopOf="@id/imageProfile" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
         android:background="@drawable/background_content_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageProfile">
 
+        <TextView
+            android:id="@+id/tvYourWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="Résultats hebdomadaire"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/_15ssp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/conversationsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_height="221dp"
             android:layout_marginTop="@dimen/_360sdp"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:overScrollMode="never"
             android:padding="@dimen/_20sdp"
             android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -90,16 +118,16 @@
             android:padding="@dimen/_20sdp" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/accountRecyclerView"
-            android:layout_width="203dp"
-            android:layout_height="94dp"
-            android:layout_marginStart="@dimen/_70sdp"
-            android:layout_marginTop="@dimen/_1sdp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:overScrollMode="never"
-            android:padding="@dimen/_20sdp" />
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/accountRecyclerView"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/_90sdp"
+         android:layout_marginTop="@dimen/_2sdp"
+         android:padding="@dimen/_20sdp"
+         android:clipToPadding="false"
+         android:overScrollMode="never"
+         android:orientation="horizontal"/>
+
 
         <TextView
             android:id="@+id/tvPastReservations"
@@ -122,6 +150,8 @@
             android:text="Réservations acceptées"
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/_9ssp" />
+
+
 
     </FrameLayout>
 
@@ -155,5 +185,22 @@
         app:layout_constraintStart_toStartOf="parent"
         android:tint="@color/white"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabGoToAllDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_100sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginRight="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_briefcase"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:tint="@color/white"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

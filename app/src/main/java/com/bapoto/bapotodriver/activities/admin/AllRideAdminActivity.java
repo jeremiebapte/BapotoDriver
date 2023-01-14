@@ -1,24 +1,24 @@
 package com.bapoto.bapotodriver.activities.admin;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.EditText;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bapoto.bapotodriver.R;
-import com.bapoto.bapotodriver.adapters.AllRideAdapter;
+import com.bapoto.bapotodriver.adapters.AllRideAdminAdapter;
 import com.bapoto.bapotodriver.databinding.ActivityAllRideAdminBinding;
 import com.bapoto.bapotodriver.models.Reservation;
 import com.bapoto.bapotodriver.models.User;
 import com.bapoto.bapotodriver.utilities.Constants;
+import com.bapoto.bapotodriver.utilities.PreferenceManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -34,7 +35,8 @@ public class AllRideAdminActivity extends AppCompatActivity {
     private ActivityAllRideAdminBinding binding;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference reservationRef = db.collection(Constants.KEY_COLLECTION_RESERVATIONS);
-    private AllRideAdapter adapter;
+    private AllRideAdminAdapter adapter;
+    private PreferenceManager preferenceManager;
     private String m_Text = "";
 
 
@@ -46,22 +48,13 @@ public class AllRideAdminActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setListeners();
         setupRecyclerView();
+        preferenceManager = new PreferenceManager(this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void setListeners() {
+            binding.imageBack.setOnClickListener(view -> {onBackPressed();});
 
-        binding.imageOpenChat.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ProfileAdminActivity.class);
-            startActivity(intent);
-            finish();
-        });
-
-        binding.imageOpenAllRide.setOnClickListener(view -> {
-            Intent intent = new Intent(this, AllRideAdminActivity.class);
-            startActivity(intent);
-            finish();
-        });
     }
 
 
@@ -74,7 +67,7 @@ public class AllRideAdminActivity extends AppCompatActivity {
                 .setQuery(query, Reservation.class)
                 .build();
 
-        adapter = new AllRideAdapter(options);
+        adapter = new AllRideAdminAdapter(options);
 
         RecyclerView recyclerView = findViewById(R.id.AdminAllreservationRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -112,6 +105,15 @@ public class AllRideAdminActivity extends AppCompatActivity {
                 db.collection(Constants.KEY_COLLECTION_USERS)
                         .document(resa.getDriverId())
                         .update(Constants.NUMBER_RIDE, FieldValue.increment(1));
+                DocumentReference documentReference = db.collection(Constants.KEY_COLLECTION_RESERVATIONS)
+                        .document(String.valueOf(docId));
+                documentReference.update(Constants.IS_PAID,true);
+                documentReference.update(Constants.KEY_PAID_THE,new Date());
+
+
+
+
+
 
 
             });

@@ -1,45 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:background="@drawable/border2"
-    android:backgroundTint="@color/primary_dark"
-    android:layout_marginTop="@dimen/_12sdp"
-    android:layout_marginStart="@dimen/_12sdp"
-    android:layout_marginEnd="@dimen/_12sdp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:orientation="vertical"
+    android:layout_width="@dimen/_230sdp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_1sdp"
+    android:layout_marginEnd="@dimen/_1sdp"
+    android:layout_marginBottom="@dimen/_1sdp"
+    android:layout_marginTop="@dimen/_1sdp">
 
 
-    <TextView
-        android:id="@+id/tvAccount"
-        android:layout_width="64dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="@dimen/_8sdp"
-
-        android:fontFamily="@font/ubuntu_regular"
-        android:gravity="center_horizontal"
-        android:text="100"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_18ssp">
 
 
-    </TextView>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/border2"
+            android:backgroundTint="@color/primary_dark"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_110sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_25sdp">
 
-    <TextView
-        android:id="@+id/euroSign"
-        android:layout_width="31dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
+            <TextView
+                android:id="@+id/tvAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:gravity="center_horizontal"
+                android:text="100"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp">
+            </TextView>
+            <TextView
+                android:id="@+id/euroSign"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/ubuntu_regular"
+                android:gravity="center_vertical"
+                android:text="€"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp">
+            </TextView>
+        </LinearLayout>
 
-        android:fontFamily="@font/ubuntu_regular"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_20sdp"
         android:gravity="center_vertical"
-        android:text="€"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_18ssp">
+        android:layout_marginStart="@dimen/_80sdp"
 
+        android:orientation="horizontal">
 
-    </TextView>
+        <TextView
+            android:id="@+id/textNbOfRide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="Nombre de course :"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/_9ssp" />
 
+        <TextView
+            android:id="@+id/tvWeeklyRide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/_9ssp" />
+
+    </LinearLayout>
 
 </LinearLayout>

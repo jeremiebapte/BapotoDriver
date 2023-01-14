@@ -49,6 +49,9 @@ public class Constants {
     public static final String KEY_IS_DONE = "isDone";
     public static final String KEY_ACCOUNT = "account";
     public static final String KEY_DRIVER_ID = "driverId";
+    public static final String IS_PAID = "isPaid";
+    public static final String KEY_PAID_THE = "dayPaid";
+
 
     public static final String KEY_RESERVATIONS_DONE = "reservationDone";
     public static final String NUMBER_RIDE = "numberOfRide";

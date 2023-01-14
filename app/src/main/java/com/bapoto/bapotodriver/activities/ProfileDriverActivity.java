@@ -2,20 +2,20 @@ package com.bapoto.bapotodriver.activities;
 
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +25,7 @@ import com.bapoto.bapotodriver.activities.admin.AdminsActivity;
 import com.bapoto.bapotodriver.adapters.DriverAccountAdapter;
 import com.bapoto.bapotodriver.adapters.RecentConversationAdapter;
 import com.bapoto.bapotodriver.adapters.ReservationAcceptedAdapter;
+import com.bapoto.bapotodriver.adapters.RideAccountAdapter;
 import com.bapoto.bapotodriver.databinding.ActivityProfileDriverBinding;
 import com.bapoto.bapotodriver.listeners.ConversionListener;
 import com.bapoto.bapotodriver.models.ChatMessage;
@@ -33,8 +34,8 @@ import com.bapoto.bapotodriver.models.User;
 import com.bapoto.bapotodriver.utilities.Constants;
 import com.bapoto.bapotodriver.utilities.PreferenceManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -43,17 +44,16 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.security.Key;
+import org.checkerframework.checker.units.qual.C;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ProfileDriverActivity extends BaseActivity implements ConversionListener {
@@ -63,6 +63,7 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
     private List<ChatMessage> conversations;
     private ReservationAcceptedAdapter adapter;
     private DriverAccountAdapter driverAccountAdapter;
+    private RideAccountAdapter rideAccountAdapter;
     private RecentConversationAdapter conversationAdapter;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference reservationRef = db.collection(Constants.KEY_COLLECTION_RESERVATIONS);
@@ -93,6 +94,7 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
         setListeners();
         setupRecyclerView();
         setupSndRecyclerView();
+
     }
 
 
@@ -106,10 +108,14 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
 
     private void setListeners() {
         binding.imageSignOut.setOnClickListener(view -> signOut());
+        binding.imageDeleteAccount.setOnClickListener(view -> alertDeleteAccount());
         binding.fabNewChat.setOnClickListener(view ->
                 startActivity(new Intent(this, AdminsActivity.class)));
         binding.fabGoToresa.setOnClickListener(view ->
                 startActivity(new Intent(this,MainActivity.class)));
+        binding.fabGoToAllDone.setOnClickListener(view -> {
+            startActivity(new Intent(this,AllRideDriverActivity.class));
+        });
     }
 
     private void getToken(){
@@ -157,22 +163,32 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
                 })
                 .addOnFailureListener(e -> showToast("Déconnexion impossible"));
     }
+
+    private void deleteAccount() {
+        showToast("Suppression du compte...");
+        DocumentReference documentReference =
+                database.collection(Constants.KEY_COLLECTION_USERS)
+                .document(preferenceManager.getString(Constants.KEY_USER_ID));
+        documentReference.delete();
+        startActivity(new Intent(this,SignUpActivity.class));
+    }
+
     //PopUp for confirm the signout
-    public void alertSignOut() {
+    public void alertDeleteAccount() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         // set title
-        alertDialogBuilder.setTitle("DÉCONNEXION");
+        alertDialogBuilder.setTitle("A BIENTOT");
         alertDialogBuilder.setIcon(R.drawable.ic_sad);
 
         // set dialog message
         alertDialogBuilder
-                .setMessage("Êtes vous sur de vouloir vous déconnecter?")
+                .setMessage("Êtes vous sur de vouloir supprimer votre compte?")
                 .setCancelable(false)
                 .setPositiveButton("Oui !", (dialog, id) -> {
                     // if this button is clicked, close
                     // current activity
-                    signOut();
+                    deleteAccount();
                 })
                 .setNegativeButton("Non", (dialog, id) -> {
                     // if this button is clicked, just close
@@ -227,11 +243,7 @@ public class ProfileDriverActivity extends BaseActivity implements ConversionLis
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(driverAccountAdapter);
-
-
-
     }
-
     private void alertFinishRide() {
         adapter.setOnButtonFinishClickListener(((documentSnapshot, position) -> {
             AtomicReference<String> docId = new AtomicReference<>(documentSnapshot.getId());

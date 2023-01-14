@@ -1,12 +1,14 @@
 package com.bapoto.bapotodriver.adapters;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bapoto.bapotodriver.R;
@@ -14,22 +16,25 @@ import com.bapoto.bapotodriver.models.Reservation;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AllRideAdapter extends FirestoreRecyclerAdapter<Reservation, AllRideAdapter.AllRideHolder> {
+public class AllRideAdminAdapter extends FirestoreRecyclerAdapter <Reservation, AllRideAdminAdapter.AllRideHolder> {
+    private OnItemClickListener listener;
 
-    public AllRideAdapter(@NonNull FirestoreRecyclerOptions<Reservation> options) {
+    public AllRideAdminAdapter(@NonNull FirestoreRecyclerOptions<Reservation> options) {
         super(options);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    protected void onBindViewHolder(@NonNull AllRideAdapter.AllRideHolder holder, int position, @NonNull Reservation model) {
+    protected void onBindViewHolder(@NonNull AllRideHolder holder, int position, @NonNull Reservation model) {
         holder.tvPickUp.setText(model.getPickUp());
         holder.tvDropOff.setText(model.getDropOff());
         holder.tvDate.setText((CharSequence) model.getDate());
-        holder.tvHour.setText(model.getHour().toString());
+        holder.tvHour.setText(model.getHour());
         holder.tvPrice.setText(model.getPrice());
         holder.tvDriver.setText(model.getDriver());
 
@@ -45,29 +50,57 @@ public class AllRideAdapter extends FirestoreRecyclerAdapter<Reservation, AllRid
         } else {
             holder.tvDateAccepted.setText("");
         }
+
+        if (model.getDayPaid() != null) {
+            holder.tvIsPaid.setText(String.format("%s","Payée !!"));
+            holder.tvIsPaid.setVisibility(View.VISIBLE);
+        } else {
+            holder.tvIsPaid.setVisibility(View.INVISIBLE);
+        }
     }
+
+
 
     @NonNull
     @Override
-    public AllRideAdapter.AllRideHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_all_reservation,
+    public AllRideHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_admin_all_reservation,
                 parent,false);
-        return new AllRideHolder(v);
+        return new AllRideHolder(view);
     }
 
-    class AllRideHolder extends RecyclerView.ViewHolder {
-        TextView tvPickUp,tvDropOff,tvDate, tvHour,tvPrice,tvDateAccepted,tvDriver;
 
+    public class AllRideHolder extends RecyclerView.ViewHolder {
+        TextView tvPickUp,tvDropOff,tvDate, tvHour,tvPrice,tvDateAccepted,tvIsPaid,tvDriver;
 
         public AllRideHolder(@NonNull View itemView) {
             super(itemView);
+
             tvPickUp = itemView.findViewById(R.id.tvpickUpAll);
             tvDropOff = itemView.findViewById(R.id.tvDropOffAll);
             tvDate = itemView.findViewById(R.id.tvDateAll);
             tvHour = itemView.findViewById(R.id.tvHourAll);
             tvPrice = itemView.findViewById(R.id.tvPriceAll);
             tvDriver = itemView.findViewById(R.id.tvDriverAll);
+            tvIsPaid = itemView.findViewById(R.id.isPaid);
             tvDateAccepted = itemView.findViewById(R.id.tvDateAcceptedAll);
+
+
+           itemView.setOnClickListener(view -> {
+               int position = getBindingAdapterPosition();
+               if (position != RecyclerView.NO_POSITION && listener!= null) {
+                   listener.onItemClick(getSnapshots().getSnapshot(position),position );
+               }
+           });
+
         }
+
+    }
+    public interface OnItemClickListener {
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

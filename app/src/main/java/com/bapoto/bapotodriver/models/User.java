@@ -6,6 +6,6 @@ public class User implements Serializable {
     public String name, image,token,email,id;
     public Boolean isAdmin;
     public Boolean isDriver;
-    public int nbOfRides;
+    public int numberOfRide;
     public int account;
 }

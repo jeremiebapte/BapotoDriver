@@ -13,8 +13,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bapoto.bapotodriver.activities.ChatActivity;
-import com.bapoto.bapotodriver.activities.SignInActivity;
 import com.bapoto.bapotodriver.activities.DriversActivity;
+import com.bapoto.bapotodriver.activities.SignInActivity;
 import com.bapoto.bapotodriver.adapters.RecentConversationAdapter;
 import com.bapoto.bapotodriver.databinding.ActivityProfileAdminBinding;
 import com.bapoto.bapotodriver.listeners.ConversionListener;
@@ -41,7 +41,8 @@ public class ProfileAdminActivity extends AppCompatActivity implements Conversio
     private PreferenceManager preferenceManager;
     private List<ChatMessage> conversations;
     private RecentConversationAdapter conversationAdapter;
-    private FirebaseFirestore database;
+    private FirebaseFirestore database = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +68,16 @@ public class ProfileAdminActivity extends AppCompatActivity implements Conversio
     private void setListeners() {
 
         binding.imageSignOut.setOnClickListener(view -> signOut());
+        binding.fabResetAccounts.setOnClickListener(view -> resetAllAccounts());
+        binding.fabAllRideFinished.setOnClickListener(view -> startActivity(new Intent(
+                this,AllRideAdminActivity.class)));
         binding.fabNewChat.setOnClickListener(view ->
                 startActivity(new Intent(this, DriversActivity.class)));
         binding.fabGoAllresa.setOnClickListener(view ->
                 startActivity(new Intent(this, MainReservationActivity.class)));
 
     }
+
 
     private void getToken(){
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
@@ -99,6 +104,11 @@ public class ProfileAdminActivity extends AppCompatActivity implements Conversio
     private void showToast(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+    private void resetAllAccounts() {
+
+
+                    }
 
     // CHAT
     private void listenConversation() {

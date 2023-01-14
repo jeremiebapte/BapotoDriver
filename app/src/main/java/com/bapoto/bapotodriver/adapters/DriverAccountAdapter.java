@@ -25,6 +25,7 @@ public class DriverAccountAdapter extends FirestoreRecyclerAdapter <User, Driver
     @Override
     protected void onBindViewHolder(@NonNull DriverAccountHolder holder, int position, @NonNull User model) {
         holder.tvAccount.setText(String.valueOf(model.account));
+        holder.tvNbOfRides.setText(String.valueOf(model.numberOfRide));
     }
 
     @NonNull
@@ -36,11 +37,12 @@ public class DriverAccountAdapter extends FirestoreRecyclerAdapter <User, Driver
     }
 
     static class DriverAccountHolder extends RecyclerView.ViewHolder {
-        TextView tvAccount;
+        TextView tvAccount, tvNbOfRides;
 
         public DriverAccountHolder(@NonNull View itemView) {
             super(itemView);
             tvAccount = itemView.findViewById(R.id.tvAccount);
+            tvNbOfRides = itemView.findViewById(R.id.tvWeeklyRide);
         }
     }
 }

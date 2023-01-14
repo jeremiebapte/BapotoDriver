@@ -40,9 +40,11 @@ public class SendReservationActivity extends AppCompatActivity {
         reservation.put(Constants.KEY_DROP_OFF,binding.inputDropOff.getText().toString());
         reservation.put(Constants.KEY_PRICE,binding.inputPrice.getText().toString());
         reservation.put(Constants.KEY_ACCEPTED_THE,null);
+        reservation.put(Constants.KEY_PAID_THE,null);
         reservation.put(Constants.KEY_FINISHED_THE,binding.inputFinishDate.getText().toString());
         reservation.put(Constants.IS_ACCEPTED,false);
         reservation.put(Constants.KEY_IS_DONE,false);
+        reservation.put(Constants.IS_PAID,false);
         reservation.put(Constants.KEY_INFOS,binding.inputInfos.getText().toString());
 
         database.collection(Constants.KEY_COLLECTION_RESERVATIONS)

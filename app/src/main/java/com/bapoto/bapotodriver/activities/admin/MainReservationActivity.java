@@ -55,22 +55,24 @@ public class MainReservationActivity extends AppCompatActivity  {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void setListeners() {
-        binding.addReservationMain.setOnClickListener(view -> {
+        binding.fabAddNewResa.setOnClickListener(view -> {
             Intent intent = new Intent(this, SendReservationActivity.class);
             startActivity(intent);
             finish();
         });
-        binding.imageOpenChat.setOnClickListener(view -> {
+        binding.imageBack.setOnClickListener(view -> onBackPressed());
+        binding.fabAllRideFinished.setOnClickListener(view -> {
+            Intent intent = new Intent(this,AllRideAdminActivity.class);
+            startActivity(intent);
+            finish();
+        });
+        binding.fabNewChat.setOnClickListener(view -> {
             Intent intent = new Intent(this, ProfileAdminActivity.class);
             startActivity(intent);
             finish();
         });
 
-        binding.imageOpenAllRide.setOnClickListener(view -> {
-            Intent intent = new Intent(this, AllRideAdminActivity.class);
-            startActivity(intent);
-            finish();
-        });
+
     }
 
     // VOIR TOUTES LES RESERVATIONS

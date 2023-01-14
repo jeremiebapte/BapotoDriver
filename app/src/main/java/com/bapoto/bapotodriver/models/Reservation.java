@@ -2,6 +2,7 @@ package com.bapoto.bapotodriver.models;
 
 import android.annotation.SuppressLint;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.firebase.Timestamp;
@@ -25,11 +26,11 @@ public class Reservation implements Serializable {
     private String pickUp;
     private String dropOff;
     private String hour;
-    // TODO REGLER SOUCI AVEC DATE POUR POUVOIR COMPARER LES DATES 
 
     @Nullable
     private String price;
     private Timestamp dayAccepted;
+    private Timestamp dayPaid;
     private String dayShouldFinish;
     @Nullable
     private String date;
@@ -39,7 +40,10 @@ public class Reservation implements Serializable {
     private String driver;
     private String driverId;
     public Boolean isDone;
+    @NonNull
+    private Boolean isPaid;
     private long timestamp;
+
 
     public Reservation() {
     }
@@ -47,9 +51,9 @@ public class Reservation implements Serializable {
 
 
 
-    public Reservation(String name, String telephone,long timestamp, @Nullable String email,@Nullable String date, String pickUp, String dropOff,
-                       String hour, @Nullable String infos, Timestamp dayAccepted,
-                       String dayShouldFinish, String driver, Boolean isDone, String driverId) {
+    public Reservation(String name, String telephone, long timestamp, @Nullable String email, @Nullable String date, String pickUp, String dropOff,
+                       String hour, @Nullable String infos, Timestamp dayAccepted,Timestamp dayPaid,
+                       String dayShouldFinish, String driver, Boolean isDone, @NonNull Boolean isPaid, String driverId) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
@@ -59,11 +63,13 @@ public class Reservation implements Serializable {
         this.date = date;
         this.infos = infos;
         this.dayAccepted = dayAccepted;
+        this.dayAccepted = dayAccepted;
         this.driver = driver;
         this.isDone = isDone;
         this.dayShouldFinish = dayShouldFinish;
         this.timestamp = timestamp;
         this.driverId = driverId;
+        this.isPaid = isPaid;
     }
 
     public Reservation(String nom, String tel, String desti, Integer price, String rdv, Date date, String hour,Boolean isDone, String infos, String dayAccepted, User sender, String driver) {
@@ -177,6 +183,13 @@ public class Reservation implements Serializable {
         this.dayAccepted = dayAccepted;
     }
 
+    public Timestamp getDayPaid() {
+        return dayPaid;
+    }
+
+    public void setDayPaid(Timestamp dayPaid) {
+        this.dayPaid = dayPaid;
+    }
 
     public String getDayShouldFinish() {
         return dayShouldFinish;
@@ -184,6 +197,15 @@ public class Reservation implements Serializable {
 
     public void setDayShouldFinish(String dayShouldFinish) {
         this.dayShouldFinish = dayShouldFinish;
+    }
+
+    @NonNull
+    public Boolean getPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(@NonNull Boolean paid) {
+        isPaid = paid;
     }
 
     public Boolean getDone() {

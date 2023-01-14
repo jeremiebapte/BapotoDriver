@@ -36,4 +36,5 @@
     <string name="notification_channel_id">my canal</string>
     <string name="notification_channel_title">my titile</string>
     <string name="notification_channel_descrption">canal de test</string>
+    <string name="mes_r_servations_termin_es">Mes Réservations Terminées</string>
 </resources>
